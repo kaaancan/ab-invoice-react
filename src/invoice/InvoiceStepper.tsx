@@ -17,7 +17,7 @@ export const InvoiceStepper = memo(function InvoiceStepper(): React.ReactElement
             <Stepper active={active} onStepClick={setActive} breakpoint="sm">
                 <Stepper.Step label="İlk adım" description="Ayı seçin">
                     <DateRangePicker label={"Faturalarin tarihi secin"} value={value}
-                                     onChange={setValue}></DateRangePicker>
+                                     onChange={setValue}/>
                 </Stepper.Step>
                 <Stepper.Step label="Son adim" description="Müşteri seçin ve fatura oluşturun">
                     Step 2 content: Verify email
