@@ -6,5 +6,5 @@ import './Login.css';
 
 export const Login = memo(function Login(): React.ReactElement {
 
-    return  <Center style={{width: 400, height: 800}}>All shit centered</Center>
+    return  <Center style={{height: 800}}>All shit centered</Center>
 })
