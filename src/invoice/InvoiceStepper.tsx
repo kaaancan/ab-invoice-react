@@ -1,9 +1,11 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import dayjs from "dayjs";
+
+import * as queries from "../graphql/queries";
 import { API } from "aws-amplify";
-import { listCustomers } from "../graphql/queries";
+import { Customer, ListCustomersQuery } from "../API";
 
 export const InvoiceStepper = memo(
   function InvoiceStepper(): React.ReactElement {
@@ -17,9 +19,27 @@ export const InvoiceStepper = memo(
       dayjs().endOf("month").toDate(),
     ]);
 
-    const allCustomers = API.graphql({ query: listCustomers });
+    const [customers, setCustomers] = useState<Customer[]>([]);
 
-    console.log(allCustomers);
+    useEffect(() => {
+      const allCustomersQuery = API.graphql({
+        query: queries.listCustomers,
+      }) as Promise<{ data: ListCustomersQuery }>;
+      allCustomersQuery.then((result) => {
+        if (
+          result.data.listCustomers &&
+          result.data.listCustomers.items !== null
+        ) {
+          result.data.listCustomers.items.map((customer) => {
+            console.log(customer);
+            if (customer !== null) {
+              console.log(customer);
+              setCustomers([...customers, customer]);
+            }
+          });
+        }
+      });
+    }, []);
 
     return (
       <div>
@@ -35,11 +55,11 @@ export const InvoiceStepper = memo(
             label="Son adim"
             description="Müşteri seçin ve fatura oluşturun"
           >
-            Step 2 content: Verify email
+            {customers.map((customer, index) => {
+              return <div key={"customer-" + index}>{customer.ownerName}</div>;
+            })}
           </Stepper.Step>
-          <Stepper.Completed>
-            Completed, click back button to get to previous step
-          </Stepper.Completed>
+          <Stepper.Completed>Aasdasd</Stepper.Completed>
         </Stepper>
 
         <Group position="center" mt="xl">
