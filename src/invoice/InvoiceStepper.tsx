@@ -2,6 +2,8 @@ import React, { memo, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import dayjs from "dayjs";
+import { API } from "aws-amplify";
+import { listCustomers } from "../graphql/queries";
 
 export const InvoiceStepper = memo(
   function InvoiceStepper(): React.ReactElement {
@@ -14,6 +16,11 @@ export const InvoiceStepper = memo(
       dayjs().startOf("month").toDate(),
       dayjs().endOf("month").toDate(),
     ]);
+
+    const allCustomers = API.graphql({ query: listCustomers });
+
+    console.log(allCustomers);
+
     return (
       <div>
         <Stepper active={active} onStepClick={setActive} breakpoint="sm">

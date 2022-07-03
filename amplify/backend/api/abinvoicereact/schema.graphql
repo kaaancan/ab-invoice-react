@@ -1,0 +1,38 @@
+type Price @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    price: String
+    dat: AWSDate
+    productID: ID! @index(name: "byProduct")
+    customerID: ID! @index(name: "byCustomer")
+}
+
+type Product @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    name: String
+    Prices: [Price] @hasMany(indexName: "byProduct", fields: ["id"])
+}
+
+type Customer @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    companyName: String
+    ownerName: String
+    Address: Address @hasOne
+    Prices: [Price] @hasMany(indexName: "byCustomer", fields: ["id"])
+}
+
+type Address @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    street: String
+    number: String
+    zip: String
+    city: String
+}
+
+type InvoiceIssuerCompany @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    name: String
+    phone: String
+    taxId: String
+    Address: Address @hasOne
+}
+ 
