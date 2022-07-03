@@ -2,10 +2,15 @@ import React, { memo, useEffect, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import dayjs from "dayjs";
-
-import * as queries from "../graphql/queries";
+import { InvoiceCreate } from "./InvoiceCreate";
+import {
+  Customer,
+  ListCustomersQuery,
+  ListProductsQuery,
+  Product,
+} from "../API";
 import { API } from "aws-amplify";
-import { Customer, ListCustomersQuery } from "../API";
+import * as queries from "../graphql/queries";
 
 export const InvoiceStepper = memo(
   function InvoiceStepper(): React.ReactElement {
@@ -21,6 +26,7 @@ export const InvoiceStepper = memo(
 
     const [customers, setCustomers] = useState<Customer[]>([]);
 
+    const [products, setProducts] = useState<Product[]>([]);
     useEffect(() => {
       const allCustomersQuery = API.graphql({
         query: queries.listCustomers,
@@ -30,17 +36,35 @@ export const InvoiceStepper = memo(
           result.data.listCustomers &&
           result.data.listCustomers.items !== null
         ) {
-          result.data.listCustomers.items.map((customer) => {
-            console.log(customer);
-            if (customer !== null) {
-              console.log(customer);
-              setCustomers([...customers, customer]);
-            }
-          });
+          const allCustomers: Customer[] = [];
+          result.data.listCustomers.items.map((customer) =>
+            customer !== null ? allCustomers.push(customer) : customer
+          );
+          setCustomers(allCustomers);
         }
       });
     }, []);
 
+    useEffect(() => {
+      const allProductsQuery = API.graphql({
+        query: queries.listProducts,
+      }) as Promise<{ data: ListProductsQuery }>;
+      allProductsQuery.then((result) => {
+        if (
+          result.data.listProducts &&
+          result.data.listProducts.items !== null
+        ) {
+          const allProducts: Product[] = [];
+          result.data.listProducts.items.map((product) =>
+            product !== null ? allProducts.push(product) : product
+          );
+          setProducts(allProducts);
+        }
+      });
+    }, []);
+
+    console.log(customers);
+    console.log(products);
     return (
       <div>
         <Stepper active={active} onStepClick={setActive} breakpoint="sm">
@@ -55,18 +79,26 @@ export const InvoiceStepper = memo(
             label="Son adim"
             description="Müşteri seçin ve fatura oluşturun"
           >
-            {customers.map((customer, index) => {
-              return <div key={"customer-" + index}>{customer.ownerName}</div>;
-            })}
+            {value[0] !== null &&
+              value[1] !== null &&
+              customers.length > 0 &&
+              products.length > 0 && (
+                <InvoiceCreate
+                  startDate={value[0]}
+                  endDate={value[1]}
+                  customers={customers}
+                  products={products}
+                />
+              )}
           </Stepper.Step>
           <Stepper.Completed>Aasdasd</Stepper.Completed>
         </Stepper>
 
         <Group position="center" mt="xl">
           <Button variant="default" onClick={prevStep}>
-            Back
+            Geri
           </Button>
-          <Button onClick={nextStep}>Next step</Button>
+          <Button onClick={nextStep}>Soranki adim</Button>
         </Group>
       </div>
     );

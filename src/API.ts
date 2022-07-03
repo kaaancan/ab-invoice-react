@@ -4,21 +4,109 @@
 
 export type CreatePriceInput = {
   id?: string | null;
-  price?: string | null;
-  dat?: string | null;
+  price: number;
   productID: string;
   customerID: string;
   _version?: number | null;
 };
 
 export type ModelPriceConditionInput = {
-  price?: ModelStringInput | null;
-  dat?: ModelStringInput | null;
+  price?: ModelFloatInput | null;
   productID?: ModelIDInput | null;
   customerID?: ModelIDInput | null;
   and?: Array<ModelPriceConditionInput | null> | null;
   or?: Array<ModelPriceConditionInput | null> | null;
   not?: ModelPriceConditionInput | null;
+};
+
+export type ModelFloatInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type ModelSizeInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+};
+
+export type Price = {
+  __typename: "Price";
+  id: string;
+  price: number;
+  productID: string;
+  customerID: string;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type UpdatePriceInput = {
+  id: string;
+  price?: number | null;
+  productID?: string | null;
+  customerID?: string | null;
+  _version?: number | null;
+};
+
+export type DeletePriceInput = {
+  id: string;
+  _version?: number | null;
+};
+
+export type CreateProductInput = {
+  id?: string | null;
+  name: string;
+  _version?: number | null;
+};
+
+export type ModelProductConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelProductConditionInput | null> | null;
+  or?: Array<ModelProductConditionInput | null> | null;
+  not?: ModelProductConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -37,90 +125,10 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null;
 };
 
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export type Price = {
-  __typename: "Price";
-  id: string;
-  price?: string | null;
-  dat?: string | null;
-  productID: string;
-  customerID: string;
-  createdAt: string;
-  updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
-};
-
-export type UpdatePriceInput = {
-  id: string;
-  price?: string | null;
-  dat?: string | null;
-  productID?: string | null;
-  customerID?: string | null;
-  _version?: number | null;
-};
-
-export type DeletePriceInput = {
-  id: string;
-  _version?: number | null;
-};
-
-export type CreateProductInput = {
-  id?: string | null;
-  name?: string | null;
-  _version?: number | null;
-};
-
-export type ModelProductConditionInput = {
-  name?: ModelStringInput | null;
-  and?: Array<ModelProductConditionInput | null> | null;
-  or?: Array<ModelProductConditionInput | null> | null;
-  not?: ModelProductConditionInput | null;
-};
-
 export type Product = {
   __typename: "Product";
   id: string;
-  name?: string | null;
+  name: string;
   Prices?: ModelPriceConnection | null;
   createdAt: string;
   updatedAt: string;
@@ -149,8 +157,8 @@ export type DeleteProductInput = {
 
 export type CreateCustomerInput = {
   id?: string | null;
-  companyName?: string | null;
-  ownerName?: string | null;
+  companyName: string;
+  ownerName: string;
   _version?: number | null;
   customerAddressId?: string | null;
 };
@@ -167,8 +175,8 @@ export type ModelCustomerConditionInput = {
 export type Customer = {
   __typename: "Customer";
   id: string;
-  companyName?: string | null;
-  ownerName?: string | null;
+  companyName: string;
+  ownerName: string;
   Address?: Address | null;
   Prices?: ModelPriceConnection | null;
   createdAt: string;
@@ -182,10 +190,10 @@ export type Customer = {
 export type Address = {
   __typename: "Address";
   id: string;
-  street?: string | null;
-  number?: string | null;
-  zip?: string | null;
-  city?: string | null;
+  street: string;
+  number: string;
+  zip: string;
+  city: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -208,10 +216,10 @@ export type DeleteCustomerInput = {
 
 export type CreateAddressInput = {
   id?: string | null;
-  street?: string | null;
-  number?: string | null;
-  zip?: string | null;
-  city?: string | null;
+  street: string;
+  number: string;
+  zip: string;
+  city: string;
   _version?: number | null;
 };
 
@@ -241,9 +249,9 @@ export type DeleteAddressInput = {
 
 export type CreateInvoiceIssuerCompanyInput = {
   id?: string | null;
-  name?: string | null;
-  phone?: string | null;
-  taxId?: string | null;
+  name: string;
+  phone: string;
+  taxId: string;
   _version?: number | null;
   invoiceIssuerCompanyAddressId?: string | null;
 };
@@ -261,9 +269,9 @@ export type ModelInvoiceIssuerCompanyConditionInput = {
 export type InvoiceIssuerCompany = {
   __typename: "InvoiceIssuerCompany";
   id: string;
-  name?: string | null;
-  phone?: string | null;
-  taxId?: string | null;
+  name: string;
+  phone: string;
+  taxId: string;
   Address?: Address | null;
   createdAt: string;
   updatedAt: string;
@@ -289,8 +297,7 @@ export type DeleteInvoiceIssuerCompanyInput = {
 
 export type ModelPriceFilterInput = {
   id?: ModelIDInput | null;
-  price?: ModelStringInput | null;
-  dat?: ModelStringInput | null;
+  price?: ModelFloatInput | null;
   productID?: ModelIDInput | null;
   customerID?: ModelIDInput | null;
   and?: Array<ModelPriceFilterInput | null> | null;
@@ -375,8 +382,7 @@ export type CreatePriceMutation = {
   createPrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -396,8 +402,7 @@ export type UpdatePriceMutation = {
   updatePrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -417,8 +422,7 @@ export type DeletePriceMutation = {
   deletePrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -438,14 +442,13 @@ export type CreateProductMutation = {
   createProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -474,14 +477,13 @@ export type UpdateProductMutation = {
   updateProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -510,14 +512,13 @@ export type DeleteProductMutation = {
   deleteProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -546,15 +547,15 @@ export type CreateCustomerMutation = {
   createCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -566,8 +567,7 @@ export type CreateCustomerMutation = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -597,15 +597,15 @@ export type UpdateCustomerMutation = {
   updateCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -617,8 +617,7 @@ export type UpdateCustomerMutation = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -648,15 +647,15 @@ export type DeleteCustomerMutation = {
   deleteCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -668,8 +667,7 @@ export type DeleteCustomerMutation = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -699,10 +697,10 @@ export type CreateAddressMutation = {
   createAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -720,10 +718,10 @@ export type UpdateAddressMutation = {
   updateAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -741,10 +739,10 @@ export type DeleteAddressMutation = {
   deleteAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -762,16 +760,16 @@ export type CreateInvoiceIssuerCompanyMutation = {
   createInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -796,16 +794,16 @@ export type UpdateInvoiceIssuerCompanyMutation = {
   updateInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -830,16 +828,16 @@ export type DeleteInvoiceIssuerCompanyMutation = {
   deleteInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -863,8 +861,7 @@ export type GetPriceQuery = {
   getPrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -887,8 +884,7 @@ export type ListPricesQuery = {
     items: Array<{
       __typename: "Price";
       id: string;
-      price?: string | null;
-      dat?: string | null;
+      price: number;
       productID: string;
       customerID: string;
       createdAt: string;
@@ -915,8 +911,7 @@ export type SyncPricesQuery = {
     items: Array<{
       __typename: "Price";
       id: string;
-      price?: string | null;
-      dat?: string | null;
+      price: number;
       productID: string;
       customerID: string;
       createdAt: string;
@@ -938,14 +933,13 @@ export type GetProductQuery = {
   getProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -977,14 +971,13 @@ export type ListProductsQuery = {
     items: Array<{
       __typename: "Product";
       id: string;
-      name?: string | null;
+      name: string;
       Prices?: {
         __typename: "ModelPriceConnection";
         items: Array<{
           __typename: "Price";
           id: string;
-          price?: string | null;
-          dat?: string | null;
+          price: number;
           productID: string;
           customerID: string;
           createdAt: string;
@@ -1020,14 +1013,13 @@ export type SyncProductsQuery = {
     items: Array<{
       __typename: "Product";
       id: string;
-      name?: string | null;
+      name: string;
       Prices?: {
         __typename: "ModelPriceConnection";
         items: Array<{
           __typename: "Price";
           id: string;
-          price?: string | null;
-          dat?: string | null;
+          price: number;
           productID: string;
           customerID: string;
           createdAt: string;
@@ -1058,15 +1050,15 @@ export type GetCustomerQuery = {
   getCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1078,8 +1070,7 @@ export type GetCustomerQuery = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1112,15 +1103,15 @@ export type ListCustomersQuery = {
     items: Array<{
       __typename: "Customer";
       id: string;
-      companyName?: string | null;
-      ownerName?: string | null;
+      companyName: string;
+      ownerName: string;
       Address?: {
         __typename: "Address";
         id: string;
-        street?: string | null;
-        number?: string | null;
-        zip?: string | null;
-        city?: string | null;
+        street: string;
+        number: string;
+        zip: string;
+        city: string;
         createdAt: string;
         updatedAt: string;
         _version: number;
@@ -1132,8 +1123,7 @@ export type ListCustomersQuery = {
         items: Array<{
           __typename: "Price";
           id: string;
-          price?: string | null;
-          dat?: string | null;
+          price: number;
           productID: string;
           customerID: string;
           createdAt: string;
@@ -1170,15 +1160,15 @@ export type SyncCustomersQuery = {
     items: Array<{
       __typename: "Customer";
       id: string;
-      companyName?: string | null;
-      ownerName?: string | null;
+      companyName: string;
+      ownerName: string;
       Address?: {
         __typename: "Address";
         id: string;
-        street?: string | null;
-        number?: string | null;
-        zip?: string | null;
-        city?: string | null;
+        street: string;
+        number: string;
+        zip: string;
+        city: string;
         createdAt: string;
         updatedAt: string;
         _version: number;
@@ -1190,8 +1180,7 @@ export type SyncCustomersQuery = {
         items: Array<{
           __typename: "Price";
           id: string;
-          price?: string | null;
-          dat?: string | null;
+          price: number;
           productID: string;
           customerID: string;
           createdAt: string;
@@ -1223,10 +1212,10 @@ export type GetAddressQuery = {
   getAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -1247,10 +1236,10 @@ export type ListAddressesQuery = {
     items: Array<{
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1275,10 +1264,10 @@ export type SyncAddressesQuery = {
     items: Array<{
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1298,16 +1287,16 @@ export type GetInvoiceIssuerCompanyQuery = {
   getInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1335,16 +1324,16 @@ export type ListInvoiceIssuerCompaniesQuery = {
     items: Array<{
       __typename: "InvoiceIssuerCompany";
       id: string;
-      name?: string | null;
-      phone?: string | null;
-      taxId?: string | null;
+      name: string;
+      phone: string;
+      taxId: string;
       Address?: {
         __typename: "Address";
         id: string;
-        street?: string | null;
-        number?: string | null;
-        zip?: string | null;
-        city?: string | null;
+        street: string;
+        number: string;
+        zip: string;
+        city: string;
         createdAt: string;
         updatedAt: string;
         _version: number;
@@ -1376,16 +1365,16 @@ export type SyncInvoiceIssuerCompaniesQuery = {
     items: Array<{
       __typename: "InvoiceIssuerCompany";
       id: string;
-      name?: string | null;
-      phone?: string | null;
-      taxId?: string | null;
+      name: string;
+      phone: string;
+      taxId: string;
       Address?: {
         __typename: "Address";
         id: string;
-        street?: string | null;
-        number?: string | null;
-        zip?: string | null;
-        city?: string | null;
+        street: string;
+        number: string;
+        zip: string;
+        city: string;
         createdAt: string;
         updatedAt: string;
         _version: number;
@@ -1408,8 +1397,7 @@ export type OnCreatePriceSubscription = {
   onCreatePrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -1424,8 +1412,7 @@ export type OnUpdatePriceSubscription = {
   onUpdatePrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -1440,8 +1427,7 @@ export type OnDeletePriceSubscription = {
   onDeletePrice?: {
     __typename: "Price";
     id: string;
-    price?: string | null;
-    dat?: string | null;
+    price: number;
     productID: string;
     customerID: string;
     createdAt: string;
@@ -1456,14 +1442,13 @@ export type OnCreateProductSubscription = {
   onCreateProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1487,14 +1472,13 @@ export type OnUpdateProductSubscription = {
   onUpdateProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1518,14 +1502,13 @@ export type OnDeleteProductSubscription = {
   onDeleteProduct?: {
     __typename: "Product";
     id: string;
-    name?: string | null;
+    name: string;
     Prices?: {
       __typename: "ModelPriceConnection";
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1549,15 +1532,15 @@ export type OnCreateCustomerSubscription = {
   onCreateCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1569,8 +1552,7 @@ export type OnCreateCustomerSubscription = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1595,15 +1577,15 @@ export type OnUpdateCustomerSubscription = {
   onUpdateCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1615,8 +1597,7 @@ export type OnUpdateCustomerSubscription = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1641,15 +1622,15 @@ export type OnDeleteCustomerSubscription = {
   onDeleteCustomer?: {
     __typename: "Customer";
     id: string;
-    companyName?: string | null;
-    ownerName?: string | null;
+    companyName: string;
+    ownerName: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1661,8 +1642,7 @@ export type OnDeleteCustomerSubscription = {
       items: Array<{
         __typename: "Price";
         id: string;
-        price?: string | null;
-        dat?: string | null;
+        price: number;
         productID: string;
         customerID: string;
         createdAt: string;
@@ -1687,10 +1667,10 @@ export type OnCreateAddressSubscription = {
   onCreateAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -1703,10 +1683,10 @@ export type OnUpdateAddressSubscription = {
   onUpdateAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -1719,10 +1699,10 @@ export type OnDeleteAddressSubscription = {
   onDeleteAddress?: {
     __typename: "Address";
     id: string;
-    street?: string | null;
-    number?: string | null;
-    zip?: string | null;
-    city?: string | null;
+    street: string;
+    number: string;
+    zip: string;
+    city: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -1735,16 +1715,16 @@ export type OnCreateInvoiceIssuerCompanySubscription = {
   onCreateInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1764,16 +1744,16 @@ export type OnUpdateInvoiceIssuerCompanySubscription = {
   onUpdateInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;
@@ -1793,16 +1773,16 @@ export type OnDeleteInvoiceIssuerCompanySubscription = {
   onDeleteInvoiceIssuerCompany?: {
     __typename: "InvoiceIssuerCompany";
     id: string;
-    name?: string | null;
-    phone?: string | null;
-    taxId?: string | null;
+    name: string;
+    phone: string;
+    taxId: string;
     Address?: {
       __typename: "Address";
       id: string;
-      street?: string | null;
-      number?: string | null;
-      zip?: string | null;
-      city?: string | null;
+      street: string;
+      number: string;
+      zip: string;
+      city: string;
       createdAt: string;
       updatedAt: string;
       _version: number;

@@ -22,8 +22,7 @@ type InvoiceIssuerCompanyMetaData = {
 
 export declare class Price {
   readonly id: string;
-  readonly price?: string | null;
-  readonly dat?: string | null;
+  readonly price: number;
   readonly productID: string;
   readonly customerID: string;
   readonly createdAt?: string | null;
@@ -41,7 +40,7 @@ export declare class Price {
 
 export declare class Product {
   readonly id: string;
-  readonly name?: string | null;
+  readonly name: string;
   readonly Prices?: (Price | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -58,8 +57,8 @@ export declare class Product {
 
 export declare class Customer {
   readonly id: string;
-  readonly companyName?: string | null;
-  readonly ownerName?: string | null;
+  readonly companyName: string;
+  readonly ownerName: string;
   readonly Address?: Address | null;
   readonly Prices?: (Price | null)[] | null;
   readonly createdAt?: string | null;
@@ -78,10 +77,10 @@ export declare class Customer {
 
 export declare class Address {
   readonly id: string;
-  readonly street?: string | null;
-  readonly number?: string | null;
-  readonly zip?: string | null;
-  readonly city?: string | null;
+  readonly street: string;
+  readonly number: string;
+  readonly zip: string;
+  readonly city: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 
@@ -97,9 +96,9 @@ export declare class Address {
 
 export declare class InvoiceIssuerCompany {
   readonly id: string;
-  readonly name?: string | null;
-  readonly phone?: string | null;
-  readonly taxId?: string | null;
+  readonly name: string;
+  readonly phone: string;
+  readonly taxId: string;
   readonly Address?: Address | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

@@ -10,7 +10,6 @@ export const createPrice = /* GraphQL */ `
     createPrice(input: $input, condition: $condition) {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -29,7 +28,6 @@ export const updatePrice = /* GraphQL */ `
     updatePrice(input: $input, condition: $condition) {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -48,7 +46,6 @@ export const deletePrice = /* GraphQL */ `
     deletePrice(input: $input, condition: $condition) {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -71,7 +68,6 @@ export const createProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -103,7 +99,6 @@ export const updateProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -135,7 +130,6 @@ export const deleteProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -180,7 +174,6 @@ export const createCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -226,7 +219,6 @@ export const updateCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -272,7 +264,6 @@ export const deleteCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt

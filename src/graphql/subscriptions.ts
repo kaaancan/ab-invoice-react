@@ -7,7 +7,6 @@ export const onCreatePrice = /* GraphQL */ `
     onCreatePrice {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -23,7 +22,6 @@ export const onUpdatePrice = /* GraphQL */ `
     onUpdatePrice {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -39,7 +37,6 @@ export const onDeletePrice = /* GraphQL */ `
     onDeletePrice {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -59,7 +56,6 @@ export const onCreateProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -88,7 +84,6 @@ export const onUpdateProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -117,7 +112,6 @@ export const onDeleteProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -159,7 +153,6 @@ export const onCreateCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -202,7 +195,6 @@ export const onUpdateCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -245,7 +237,6 @@ export const onDeleteCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt

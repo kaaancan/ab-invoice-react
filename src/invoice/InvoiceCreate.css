@@ -1,0 +1,21 @@
+
+.invoiceCreate {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.currentCustomer {
+
+}
+
+.productInputWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.productInput {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}

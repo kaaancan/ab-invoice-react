@@ -7,7 +7,6 @@ export const getPrice = /* GraphQL */ `
     getPrice(id: $id) {
       id
       price
-      dat
       productID
       customerID
       createdAt
@@ -28,7 +27,6 @@ export const listPrices = /* GraphQL */ `
       items {
         id
         price
-        dat
         productID
         customerID
         createdAt
@@ -58,7 +56,6 @@ export const syncPrices = /* GraphQL */ `
       items {
         id
         price
-        dat
         productID
         customerID
         createdAt
@@ -81,7 +78,6 @@ export const getProduct = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -115,7 +111,6 @@ export const listProducts = /* GraphQL */ `
           items {
             id
             price
-            dat
             productID
             customerID
             createdAt
@@ -158,7 +153,6 @@ export const syncProducts = /* GraphQL */ `
           items {
             id
             price
-            dat
             productID
             customerID
             createdAt
@@ -203,7 +197,6 @@ export const getCustomer = /* GraphQL */ `
         items {
           id
           price
-          dat
           productID
           customerID
           createdAt
@@ -251,7 +244,6 @@ export const listCustomers = /* GraphQL */ `
           items {
             id
             price
-            dat
             productID
             customerID
             createdAt
@@ -308,7 +300,6 @@ export const syncCustomers = /* GraphQL */ `
           items {
             id
             price
-            dat
             productID
             customerID
             createdAt
