@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Price": {
-            "name": "Price",
+        "Invoice": {
+            "name": "Invoice",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,103 +10,40 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "price": {
-                    "name": "price",
+                "deliveryStartDate": {
+                    "name": "deliveryStartDate",
                     "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
+                    "type": "AWSDate",
+                    "isRequired": false,
                     "attributes": []
                 },
-                "productID": {
-                    "name": "productID",
+                "deliveryEndDate": {
+                    "name": "deliveryEndDate",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": "AWSDate",
+                    "isRequired": false,
                     "attributes": []
                 },
-                "customerID": {
-                    "name": "customerID",
+                "issueDate": {
+                    "name": "issueDate",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": "AWSDate",
+                    "isRequired": false,
                     "attributes": []
                 },
-                "createdAt": {
-                    "name": "createdAt",
+                "Customer": {
+                    "name": "Customer",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": {
+                        "model": "Customer"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Prices",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byProduct",
-                        "fields": [
-                            "productID"
-                        ]
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "invoiceCustomerId"
                     }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCustomer",
-                        "fields": [
-                            "customerID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Product": {
-            "name": "Product",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
                 },
                 "Prices": {
                     "name": "Prices",
@@ -119,7 +56,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "productID"
+                        "associatedWith": "invoiceID"
                     }
                 },
                 "createdAt": {
@@ -137,10 +74,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "invoiceCustomerId": {
+                    "name": "invoiceCustomerId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Products",
+            "pluralName": "Invoices",
             "attributes": [
                 {
                     "type": "model",
@@ -345,6 +289,186 @@ export const schema = {
                 }
             ]
         },
+        "Price": {
+            "name": "Price",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "productID": {
+                    "name": "productID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "customerID": {
+                    "name": "customerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "invoiceID": {
+                    "name": "invoiceID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Prices",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byProduct",
+                        "fields": [
+                            "productID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCustomer",
+                        "fields": [
+                            "customerID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byInvoice",
+                        "fields": [
+                            "invoiceID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Product": {
+            "name": "Product",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Prices": {
+                    "name": "Prices",
+                    "isArray": true,
+                    "type": {
+                        "model": "Price"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "productID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Products",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "InvoiceIssuerCompany": {
             "name": "InvoiceIssuerCompany",
             "fields": {
@@ -442,5 +566,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "88bd676d1e069f77352a2ca6ad3b15c5"
+    "version": "cd32591857b06ae451cab6c7a7d572b9"
 };

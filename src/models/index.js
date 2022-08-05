@@ -2,7 +2,7 @@
 import { initSchema } from "@aws-amplify/datastore";
 import { schema } from "./schema";
 
-const { Price, Product, Customer, Address, InvoiceIssuerCompany } =
+const { Invoice, Customer, Address, Price, Product, InvoiceIssuerCompany } =
   initSchema(schema);
 
-export { Price, Product, Customer, Address, InvoiceIssuerCompany };
+export { Invoice, Customer, Address, Price, Product, InvoiceIssuerCompany };

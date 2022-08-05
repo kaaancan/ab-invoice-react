@@ -2,6 +2,217 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getInvoice = /* GraphQL */ `
+  query GetInvoice($id: ID!) {
+    getInvoice(id: $id) {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
+export const listInvoices = /* GraphQL */ `
+  query ListInvoices(
+    $filter: ModelInvoiceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInvoices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        deliveryStartDate
+        deliveryEndDate
+        issueDate
+        Customer {
+          id
+          companyName
+          ownerName
+          Address {
+            id
+            street
+            number
+            zip
+            city
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Prices {
+            nextToken
+            startedAt
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          customerAddressId
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        invoiceCustomerId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncInvoices = /* GraphQL */ `
+  query SyncInvoices(
+    $filter: ModelInvoiceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncInvoices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        deliveryStartDate
+        deliveryEndDate
+        issueDate
+        Customer {
+          id
+          companyName
+          ownerName
+          Address {
+            id
+            street
+            number
+            zip
+            city
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Prices {
+            nextToken
+            startedAt
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          customerAddressId
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        invoiceCustomerId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getPrice = /* GraphQL */ `
   query GetPrice($id: ID!) {
     getPrice(id: $id) {
@@ -9,6 +220,7 @@ export const getPrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -29,6 +241,7 @@ export const listPrices = /* GraphQL */ `
         price
         productID
         customerID
+        invoiceID
         createdAt
         updatedAt
         _version
@@ -58,6 +271,7 @@ export const syncPrices = /* GraphQL */ `
         price
         productID
         customerID
+        invoiceID
         createdAt
         updatedAt
         _version
@@ -80,6 +294,7 @@ export const getProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -113,6 +328,7 @@ export const listProducts = /* GraphQL */ `
             price
             productID
             customerID
+            invoiceID
             createdAt
             updatedAt
             _version
@@ -155,6 +371,7 @@ export const syncProducts = /* GraphQL */ `
             price
             productID
             customerID
+            invoiceID
             createdAt
             updatedAt
             _version
@@ -199,6 +416,7 @@ export const getCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -246,6 +464,7 @@ export const listCustomers = /* GraphQL */ `
             price
             productID
             customerID
+            invoiceID
             createdAt
             updatedAt
             _version
@@ -302,6 +521,7 @@ export const syncCustomers = /* GraphQL */ `
             price
             productID
             customerID
+            invoiceID
             createdAt
             updatedAt
             _version

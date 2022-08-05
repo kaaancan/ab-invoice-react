@@ -98,7 +98,9 @@ export const InvoiceStepper = memo(
           <Button variant="default" onClick={prevStep}>
             Geri
           </Button>
-          <Button onClick={nextStep}>Soranki adim</Button>
+          <Button color={"green"} onClick={nextStep}>
+            Soranki adim
+          </Button>
         </Group>
       </div>
     );

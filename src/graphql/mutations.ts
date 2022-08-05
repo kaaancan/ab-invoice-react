@@ -2,6 +2,228 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createInvoice = /* GraphQL */ `
+  mutation CreateInvoice(
+    $input: CreateInvoiceInput!
+    $condition: ModelInvoiceConditionInput
+  ) {
+    createInvoice(input: $input, condition: $condition) {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
+export const updateInvoice = /* GraphQL */ `
+  mutation UpdateInvoice(
+    $input: UpdateInvoiceInput!
+    $condition: ModelInvoiceConditionInput
+  ) {
+    updateInvoice(input: $input, condition: $condition) {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
+export const deleteInvoice = /* GraphQL */ `
+  mutation DeleteInvoice(
+    $input: DeleteInvoiceInput!
+    $condition: ModelInvoiceConditionInput
+  ) {
+    deleteInvoice(input: $input, condition: $condition) {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
 export const createPrice = /* GraphQL */ `
   mutation CreatePrice(
     $input: CreatePriceInput!
@@ -12,6 +234,7 @@ export const createPrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -30,6 +253,7 @@ export const updatePrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -48,6 +272,7 @@ export const deletePrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -70,6 +295,7 @@ export const createProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -101,6 +327,7 @@ export const updateProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -132,6 +359,7 @@ export const deleteProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -176,6 +404,7 @@ export const createCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -221,6 +450,7 @@ export const updateCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -266,6 +496,7 @@ export const deleteCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version

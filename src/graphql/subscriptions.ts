@@ -2,6 +2,219 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateInvoice = /* GraphQL */ `
+  subscription OnCreateInvoice {
+    onCreateInvoice {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
+export const onUpdateInvoice = /* GraphQL */ `
+  subscription OnUpdateInvoice {
+    onUpdateInvoice {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
+export const onDeleteInvoice = /* GraphQL */ `
+  subscription OnDeleteInvoice {
+    onDeleteInvoice {
+      id
+      deliveryStartDate
+      deliveryEndDate
+      issueDate
+      Customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            price
+            productID
+            customerID
+            invoiceID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      Prices {
+        items {
+          id
+          price
+          productID
+          customerID
+          invoiceID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      invoiceCustomerId
+    }
+  }
+`;
 export const onCreatePrice = /* GraphQL */ `
   subscription OnCreatePrice {
     onCreatePrice {
@@ -9,6 +222,7 @@ export const onCreatePrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -24,6 +238,7 @@ export const onUpdatePrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -39,6 +254,7 @@ export const onDeletePrice = /* GraphQL */ `
       price
       productID
       customerID
+      invoiceID
       createdAt
       updatedAt
       _version
@@ -58,6 +274,7 @@ export const onCreateProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -86,6 +303,7 @@ export const onUpdateProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -114,6 +332,7 @@ export const onDeleteProduct = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -155,6 +374,7 @@ export const onCreateCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -197,6 +417,7 @@ export const onUpdateCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version
@@ -239,6 +460,7 @@ export const onDeleteCustomer = /* GraphQL */ `
           price
           productID
           customerID
+          invoiceID
           createdAt
           updatedAt
           _version

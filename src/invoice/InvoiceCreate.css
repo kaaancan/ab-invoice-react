@@ -2,11 +2,13 @@
 .invoiceCreate {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 }
 
-
-.currentCustomer {
-
+.customerNavigationButtons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .productInputWrapper {

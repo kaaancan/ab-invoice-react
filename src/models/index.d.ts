@@ -1,10 +1,6 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 
-type PriceMetaData = {
-  readOnlyFields: "createdAt" | "updatedAt";
-};
-
-type ProductMetaData = {
+type InvoiceMetaData = {
   readOnlyFields: "createdAt" | "updatedAt";
 };
 
@@ -16,43 +12,37 @@ type AddressMetaData = {
   readOnlyFields: "createdAt" | "updatedAt";
 };
 
+type PriceMetaData = {
+  readOnlyFields: "createdAt" | "updatedAt";
+};
+
+type ProductMetaData = {
+  readOnlyFields: "createdAt" | "updatedAt";
+};
+
 type InvoiceIssuerCompanyMetaData = {
   readOnlyFields: "createdAt" | "updatedAt";
 };
 
-export declare class Price {
+export declare class Invoice {
   readonly id: string;
-  readonly price: number;
-  readonly productID: string;
-  readonly customerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-
-  constructor(init: ModelInit<Price, PriceMetaData>);
-
-  static copyOf(
-    source: Price,
-    mutator: (
-      draft: MutableModel<Price, PriceMetaData>
-    ) => MutableModel<Price, PriceMetaData> | void
-  ): Price;
-}
-
-export declare class Product {
-  readonly id: string;
-  readonly name: string;
+  readonly deliveryStartDate?: string | null;
+  readonly deliveryEndDate?: string | null;
+  readonly issueDate?: string | null;
+  readonly Customer?: Customer | null;
   readonly Prices?: (Price | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly invoiceCustomerId?: string | null;
 
-  constructor(init: ModelInit<Product, ProductMetaData>);
+  constructor(init: ModelInit<Invoice, InvoiceMetaData>);
 
   static copyOf(
-    source: Product,
+    source: Invoice,
     mutator: (
-      draft: MutableModel<Product, ProductMetaData>
-    ) => MutableModel<Product, ProductMetaData> | void
-  ): Product;
+      draft: MutableModel<Invoice, InvoiceMetaData>
+    ) => MutableModel<Invoice, InvoiceMetaData> | void
+  ): Invoice;
 }
 
 export declare class Customer {
@@ -92,6 +82,42 @@ export declare class Address {
       draft: MutableModel<Address, AddressMetaData>
     ) => MutableModel<Address, AddressMetaData> | void
   ): Address;
+}
+
+export declare class Price {
+  readonly id: string;
+  readonly price: number;
+  readonly productID: string;
+  readonly customerID: string;
+  readonly invoiceID?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+
+  constructor(init: ModelInit<Price, PriceMetaData>);
+
+  static copyOf(
+    source: Price,
+    mutator: (
+      draft: MutableModel<Price, PriceMetaData>
+    ) => MutableModel<Price, PriceMetaData> | void
+  ): Price;
+}
+
+export declare class Product {
+  readonly id: string;
+  readonly name: string;
+  readonly Prices?: (Price | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+
+  constructor(init: ModelInit<Product, ProductMetaData>);
+
+  static copyOf(
+    source: Product,
+    mutator: (
+      draft: MutableModel<Product, ProductMetaData>
+    ) => MutableModel<Product, ProductMetaData> | void
+  ): Product;
 }
 
 export declare class InvoiceIssuerCompany {

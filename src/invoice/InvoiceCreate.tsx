@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Customer, Product } from "../API";
 
 import "./InvoiceCreate.css";
-import { TextInput } from "@mantine/core";
+import { Button, Select, TextInput } from "@mantine/core";
 import { find } from "lodash";
 
 export interface InvoiceCreateProps {
@@ -36,33 +36,73 @@ export const InvoiceCreate = memo(function InvoiceCreate(
     updatedAt: "",
   });
 
+  const [currentCustomerSelect, setCurrentCustomerSelect] =
+    useState<string>("");
+
+  const [currentCustomerIndex, setCurrentCustomerIndex] = useState<number>(0);
+
   useEffect(() => {
     setCurrentCustomer(customers[0]);
+    setCurrentCustomerSelect(customers[0].id);
+    setCurrentCustomerIndex(0);
   }, [customers]);
+
+  useEffect(() => {
+    setCurrentCustomer(customers[currentCustomerIndex]);
+    setCurrentCustomerSelect(customers[currentCustomerIndex].id);
+  }, [currentCustomerIndex]);
 
   return (
     <div className={"invoiceCreate"}>
-      <div className={"currentCustomer"}>
-        <div>
-          {currentCustomer.companyName}/{currentCustomer.ownerName}
-        </div>
-        <div className={"productInputWrapper"}>
-          {currentCustomer.Prices !== null &&
-            currentCustomer.Prices?.items.map((productWithPrice, index) => {
-              const productForPrice: Product | undefined = find(products, {
-                id: productWithPrice?.productID || "",
-              });
-              if (productWithPrice !== null && productForPrice !== undefined) {
-                return (
-                  <div className={"productInput"} key={index}>
-                    <TextInput style={{ width: 50 }} />
-                    <div>{formatNumberToEuro(productWithPrice.price)}</div>
-                    <div>{productForPrice.name}</div>
-                  </div>
-                );
-              }
-            })}
-        </div>
+      <div>
+        <Select
+          data={customers.map((customer) => {
+            return {
+              value: customer.id,
+              label: `${customer.companyName}/${customer.ownerName}`,
+            };
+          })}
+          value={currentCustomerSelect}
+          onChange={(value: string) => {
+            //TODO KAAN: If changed this, need to change index stuff
+            console.log(value);
+            setCurrentCustomerSelect(value);
+          }}
+        />
+      </div>
+
+      <div className={"productInputWrapper"}>
+        {currentCustomer.Prices !== null &&
+          currentCustomer.Prices?.items.map((productWithPrice, index) => {
+            const productForPrice: Product | undefined = find(products, {
+              id: productWithPrice?.productID || "",
+            });
+            if (productWithPrice !== null && productForPrice !== undefined) {
+              return (
+                <div className={"productInput"} key={index}>
+                  <TextInput style={{ width: 50 }} />
+                  <div>{formatNumberToEuro(productWithPrice.price)}</div>
+                  <div>{productForPrice.name}</div>
+                </div>
+              );
+            }
+          })}
+      </div>
+      <div className={"customerNavigationButtons"}>
+        {currentCustomerIndex > 0 && (
+          <Button
+            onClick={() => setCurrentCustomerIndex(currentCustomerIndex - 1)}
+          >
+            Önceki müşteri
+          </Button>
+        )}
+        {currentCustomerIndex < customers.length - 1 && (
+          <Button
+            onClick={() => setCurrentCustomerIndex(currentCustomerIndex + 1)}
+          >
+            Sonraki müşteri
+          </Button>
+        )}
       </div>
     </div>
   );
