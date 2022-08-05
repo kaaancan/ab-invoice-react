@@ -7,10 +7,12 @@ This WebApp is fully hosted (FE/BE) on AWS Amplify. To start fresh:
 3. Go to Amplify and get the 'amplify pull" command
 4. amplify codegen to create all necessary classes
 
-Important stuff:
+## Important stuff:
 
 1. Check aws amplify cli version with the one that is used on CI/CD
 2. Check node version with the one that is used on CI/CD
+3. When API Key stuff is broken:
+    1. https://stackoverflow.com/questions/71006168/amplify-api-graphql-unable-to-change-local-api-key-with-the-one-generated-onli
 
 # Getting Started with Create React App
 
