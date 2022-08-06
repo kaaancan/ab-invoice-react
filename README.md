@@ -6,6 +6,7 @@ This WebApp is fully hosted (FE/BE) on AWS Amplify. To start fresh:
 2. npm install
 3. Go to Amplify and get the 'amplify pull" command
 4. amplify codegen to create all necessary classes
+    1. Setup amplify codegen and setup maximum depth to atleast 6 this is to ensure that we get deeply nested objects
 
 ## Important stuff:
 

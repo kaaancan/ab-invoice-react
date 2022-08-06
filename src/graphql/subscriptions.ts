@@ -28,10 +28,50 @@ export const onCreateInvoice = /* GraphQL */ `
         Prices {
           items {
             id
-            price
-            productID
+            priceID
             customerID
-            invoiceID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
             createdAt
             updatedAt
             _version
@@ -53,8 +93,43 @@ export const onCreateInvoice = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -99,10 +174,50 @@ export const onUpdateInvoice = /* GraphQL */ `
         Prices {
           items {
             id
-            price
-            productID
+            priceID
             customerID
-            invoiceID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
             createdAt
             updatedAt
             _version
@@ -124,8 +239,43 @@ export const onUpdateInvoice = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -170,10 +320,50 @@ export const onDeleteInvoice = /* GraphQL */ `
         Prices {
           items {
             id
-            price
-            productID
+            priceID
             customerID
-            invoiceID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
             createdAt
             updatedAt
             _version
@@ -195,8 +385,43 @@ export const onDeleteInvoice = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -221,8 +446,83 @@ export const onCreatePrice = /* GraphQL */ `
       id
       price
       productID
-      customerID
       invoiceID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -237,8 +537,83 @@ export const onUpdatePrice = /* GraphQL */ `
       id
       price
       productID
-      customerID
       invoiceID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -253,8 +628,83 @@ export const onDeletePrice = /* GraphQL */ `
       id
       price
       productID
-      customerID
       invoiceID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -273,8 +723,43 @@ export const onCreateProduct = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -302,8 +787,43 @@ export const onUpdateProduct = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -331,8 +851,43 @@ export const onDeleteProduct = /* GraphQL */ `
           id
           price
           productID
-          customerID
           invoiceID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                invoiceID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
           createdAt
           updatedAt
           _version
@@ -371,10 +926,70 @@ export const onCreateCustomer = /* GraphQL */ `
       Prices {
         items {
           id
-          price
-          productID
+          priceID
           customerID
-          invoiceID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
           createdAt
           updatedAt
           _version
@@ -414,10 +1029,70 @@ export const onUpdateCustomer = /* GraphQL */ `
       Prices {
         items {
           id
-          price
-          productID
+          priceID
           customerID
-          invoiceID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
           createdAt
           updatedAt
           _version
@@ -457,10 +1132,70 @@ export const onDeleteCustomer = /* GraphQL */ `
       Prices {
         items {
           id
-          price
-          productID
+          priceID
           customerID
-          invoiceID
+          price {
+            id
+            price
+            productID
+            invoiceID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            customerAddressId
+          }
           createdAt
           updatedAt
           _version
@@ -608,6 +1343,486 @@ export const onDeleteInvoiceIssuerCompany = /* GraphQL */ `
       _deleted
       _lastChangedAt
       invoiceIssuerCompanyAddressId
+    }
+  }
+`;
+export const onCreateCustomerPrice = /* GraphQL */ `
+  subscription OnCreateCustomerPrice {
+    onCreateCustomerPrice {
+      id
+      priceID
+      customerID
+      price {
+        id
+        price
+        productID
+        invoiceID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateCustomerPrice = /* GraphQL */ `
+  subscription OnUpdateCustomerPrice {
+    onUpdateCustomerPrice {
+      id
+      priceID
+      customerID
+      price {
+        id
+        price
+        productID
+        invoiceID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteCustomerPrice = /* GraphQL */ `
+  subscription OnDeleteCustomerPrice {
+    onDeleteCustomerPrice {
+      id
+      priceID
+      customerID
+      price {
+        id
+        price
+        productID
+        invoiceID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      customer {
+        id
+        companyName
+        ownerName
+        Address {
+          id
+          street
+          number
+          zip
+          city
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Prices {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              invoiceID
+              customers {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              Prices {
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        customerAddressId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

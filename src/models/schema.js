@@ -150,14 +150,14 @@ export const schema = {
                     "name": "Prices",
                     "isArray": true,
                     "type": {
-                        "model": "Price"
+                        "model": "CustomerPrice"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "customerID"
+                        "associatedWith": "customer"
                     }
                 },
                 "createdAt": {
@@ -313,19 +313,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "customerID": {
-                    "name": "customerID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "invoiceID": {
                     "name": "invoiceID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
+                },
+                "customers": {
+                    "name": "customers",
+                    "isArray": true,
+                    "type": {
+                        "model": "CustomerPrice"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "price"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -357,15 +364,6 @@ export const schema = {
                         "name": "byProduct",
                         "fields": [
                             "productID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCustomer",
-                        "fields": [
-                            "customerID"
                         ]
                     }
                 },
@@ -562,9 +560,89 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "CustomerPrice": {
+            "name": "CustomerPrice",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "customer": {
+                    "name": "customer",
+                    "isArray": false,
+                    "type": {
+                        "model": "Customer"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "customerID"
+                    }
+                },
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": {
+                        "model": "Price"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "priceID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "CustomerPrices",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCustomer",
+                        "fields": [
+                            "customerID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPrice",
+                        "fields": [
+                            "priceID"
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "cd32591857b06ae451cab6c7a7d572b9"
+    "version": "95b5fca2d74b807d221b92c13bac21d2"
 };

@@ -24,6 +24,10 @@ type InvoiceIssuerCompanyMetaData = {
   readOnlyFields: "createdAt" | "updatedAt";
 };
 
+type CustomerPriceMetaData = {
+  readOnlyFields: "createdAt" | "updatedAt";
+};
+
 export declare class Invoice {
   readonly id: string;
   readonly deliveryStartDate?: string | null;
@@ -50,7 +54,7 @@ export declare class Customer {
   readonly companyName: string;
   readonly ownerName: string;
   readonly Address?: Address | null;
-  readonly Prices?: (Price | null)[] | null;
+  readonly Prices?: (CustomerPrice | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly customerAddressId?: string | null;
@@ -88,8 +92,8 @@ export declare class Price {
   readonly id: string;
   readonly price: number;
   readonly productID: string;
-  readonly customerID: string;
   readonly invoiceID?: string | null;
+  readonly customers?: (CustomerPrice | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 
@@ -140,4 +144,21 @@ export declare class InvoiceIssuerCompany {
       draft: MutableModel<InvoiceIssuerCompany, InvoiceIssuerCompanyMetaData>
     ) => MutableModel<InvoiceIssuerCompany, InvoiceIssuerCompanyMetaData> | void
   ): InvoiceIssuerCompany;
+}
+
+export declare class CustomerPrice {
+  readonly id: string;
+  readonly customer: Customer;
+  readonly price: Price;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+
+  constructor(init: ModelInit<CustomerPrice, CustomerPriceMetaData>);
+
+  static copyOf(
+    source: CustomerPrice,
+    mutator: (
+      draft: MutableModel<CustomerPrice, CustomerPriceMetaData>
+    ) => MutableModel<CustomerPrice, CustomerPriceMetaData> | void
+  ): CustomerPrice;
 }

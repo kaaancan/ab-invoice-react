@@ -38,7 +38,9 @@ export const InvoiceStepper = memo(
         ) {
           const allCustomers: Customer[] = [];
           result.data.listCustomers.items.map((customer) =>
-            customer !== null ? allCustomers.push(customer) : customer
+            customer !== null
+              ? allCustomers.push(customer as Customer)
+              : customer
           );
           setCustomers(allCustomers);
         }
@@ -56,7 +58,7 @@ export const InvoiceStepper = memo(
         ) {
           const allProducts: Product[] = [];
           result.data.listProducts.items.map((product) =>
-            product !== null ? allProducts.push(product) : product
+            product !== null ? allProducts.push(product as Product) : product
           );
           setProducts(allProducts);
         }

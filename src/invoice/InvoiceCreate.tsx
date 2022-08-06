@@ -64,29 +64,40 @@ export const InvoiceCreate = memo(function InvoiceCreate(
           })}
           value={currentCustomerSelect}
           onChange={(value: string) => {
-            //TODO KAAN: If changed this, need to change index stuff
-            console.log(value);
-            setCurrentCustomerSelect(value);
+            const selectedCustomer = customers.find(
+              (customer) => customer.id === value
+            );
+            if (selectedCustomer) {
+              setCurrentCustomer(selectedCustomer);
+              setCurrentCustomerSelect(value);
+              setCurrentCustomerIndex(
+                customers.findIndex((customer) => customer === selectedCustomer)
+              );
+            }
           }}
         />
       </div>
 
       <div className={"productInputWrapper"}>
         {currentCustomer.Prices !== null &&
-          currentCustomer.Prices?.items.map((productWithPrice, index) => {
-            const productForPrice: Product | undefined = find(products, {
-              id: productWithPrice?.productID || "",
-            });
-            if (productWithPrice !== null && productForPrice !== undefined) {
-              return (
-                <div className={"productInput"} key={index}>
-                  <TextInput style={{ width: 50 }} />
-                  <div>{formatNumberToEuro(productWithPrice.price)}</div>
-                  <div>{productForPrice.name}</div>
-                </div>
-              );
-            }
-          })}
+          currentCustomer.Prices?.items
+            .filter((productWithPrice) => !productWithPrice?._deleted)
+            .map((productWithPrice, index) => {
+              const productForPrice: Product | undefined = find(products, {
+                id: productWithPrice?.price.productID || "",
+              });
+              if (productWithPrice !== null && productForPrice !== undefined) {
+                return (
+                  <div className={"productInput"} key={index}>
+                    <TextInput style={{ width: 50 }} />
+                    <div>
+                      {formatNumberToEuro(productWithPrice.price.price)}
+                    </div>
+                    <div>{productForPrice.name}</div>
+                  </div>
+                );
+              }
+            })}
       </div>
       <div className={"customerNavigationButtons"}>
         {currentCustomerIndex > 0 && (

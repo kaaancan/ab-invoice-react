@@ -11,8 +11,8 @@ type Price @model @auth(rules: [{allow: public}]) {
   id: ID!
   price: Float!
   productID: ID! @index(name: "byProduct")
-  customerID: ID! @index(name: "byCustomer")
   invoiceID: ID @index(name: "byInvoice")
+  customers: [Customer] @manyToMany(relationName: "CustomerPrice")
 }
 
 type Product @model @auth(rules: [{allow: public}]) {
@@ -26,7 +26,7 @@ type Customer @model @auth(rules: [{allow: public}]) {
   companyName: String!
   ownerName: String!
   Address: Address @hasOne
-  Prices: [Price] @hasMany(indexName: "byCustomer", fields: ["id"])
+  Prices: [Price] @manyToMany(relationName: "CustomerPrice")
 }
 
 type Address @model @auth(rules: [{allow: public}]) {
