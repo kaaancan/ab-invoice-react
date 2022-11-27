@@ -2,5 +2,11 @@
   "AppSyncApiName": "abinvoicereact",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-08-05T19:41:29.729Z"
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authabinvoicereactdad17203",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-11-27T10:15:11.741Z"
 }

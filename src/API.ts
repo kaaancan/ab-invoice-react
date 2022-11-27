@@ -2,23 +2,16 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateInvoiceInput = {
+export type CreateProductInput = {
   id?: string | null;
-  deliveryStartDate?: string | null;
-  deliveryEndDate?: string | null;
-  issueDate?: string | null;
-  _version?: number | null;
-  invoiceCustomerId?: string | null;
+  name?: string | null;
 };
 
-export type ModelInvoiceConditionInput = {
-  deliveryStartDate?: ModelStringInput | null;
-  deliveryEndDate?: ModelStringInput | null;
-  issueDate?: ModelStringInput | null;
-  and?: Array<ModelInvoiceConditionInput | null> | null;
-  or?: Array<ModelInvoiceConditionInput | null> | null;
-  not?: ModelInvoiceConditionInput | null;
-  invoiceCustomerId?: ModelIDInput | null;
+export type ModelProductConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelProductConditionInput | null> | null;
+  or?: Array<ModelProductConditionInput | null> | null;
+  not?: ModelProductConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -60,36 +53,46 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export type Invoice = {
-  __typename: "Invoice";
+export type Product = {
+  __typename: "Product";
   id: string;
-  deliveryStartDate?: string | null;
-  deliveryEndDate?: string | null;
-  issueDate?: string | null;
-  Customer?: Customer | null;
+  name?: string | null;
   Prices?: ModelPriceConnection | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
-  invoiceCustomerId?: string | null;
+};
+
+export type ModelPriceConnection = {
+  __typename: "ModelPriceConnection";
+  items: Array<Price | null>;
+  nextToken?: string | null;
+};
+
+export type Price = {
+  __typename: "Price";
+  id: string;
+  price?: number | null;
+  productID: string;
+  customers?: ModelCustomerPriceConnection | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ModelCustomerPriceConnection = {
+  __typename: "ModelCustomerPriceConnection";
+  items: Array<CustomerPrice | null>;
+  nextToken?: string | null;
+};
+
+export type CustomerPrice = {
+  __typename: "CustomerPrice";
+  id: string;
+  priceID: string;
+  customerID: string;
+  price: Price;
+  customer: Customer;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Customer = {
@@ -101,9 +104,6 @@ export type Customer = {
   Prices?: ModelCustomerPriceConnection | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   customerAddressId?: string | null;
 };
 
@@ -116,79 +116,26 @@ export type Address = {
   city: string;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
 };
 
-export type ModelCustomerPriceConnection = {
-  __typename: "ModelCustomerPriceConnection";
-  items: Array<CustomerPrice | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type CustomerPrice = {
-  __typename: "CustomerPrice";
+export type UpdateProductInput = {
   id: string;
-  priceID: string;
-  customerID: string;
-  price: Price;
-  customer: Customer;
-  createdAt: string;
-  updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
+  name?: string | null;
 };
 
-export type Price = {
-  __typename: "Price";
+export type DeleteProductInput = {
   id: string;
-  price: number;
-  productID: string;
-  invoiceID?: string | null;
-  customers?: ModelCustomerPriceConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
-};
-
-export type ModelPriceConnection = {
-  __typename: "ModelPriceConnection";
-  items: Array<Price | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type UpdateInvoiceInput = {
-  id: string;
-  deliveryStartDate?: string | null;
-  deliveryEndDate?: string | null;
-  issueDate?: string | null;
-  _version?: number | null;
-  invoiceCustomerId?: string | null;
-};
-
-export type DeleteInvoiceInput = {
-  id: string;
-  _version?: number | null;
 };
 
 export type CreatePriceInput = {
   id?: string | null;
-  price: number;
+  price?: number | null;
   productID: string;
-  invoiceID?: string | null;
-  _version?: number | null;
 };
 
 export type ModelPriceConditionInput = {
   price?: ModelFloatInput | null;
   productID?: ModelIDInput | null;
-  invoiceID?: ModelIDInput | null;
   and?: Array<ModelPriceConditionInput | null> | null;
   or?: Array<ModelPriceConditionInput | null> | null;
   not?: ModelPriceConditionInput | null;
@@ -206,60 +153,78 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type UpdatePriceInput = {
   id: string;
   price?: number | null;
   productID?: string | null;
-  invoiceID?: string | null;
-  _version?: number | null;
 };
 
 export type DeletePriceInput = {
   id: string;
-  _version?: number | null;
 };
 
-export type CreateProductInput = {
+export type CreateInvoiceInput = {
   id?: string | null;
-  name: string;
-  _version?: number | null;
+  deliveryStartDate?: string | null;
+  deliveryEndDate?: string | null;
+  issueDate?: string | null;
+  invoiceCustomerId?: string | null;
 };
 
-export type ModelProductConditionInput = {
-  name?: ModelStringInput | null;
-  and?: Array<ModelProductConditionInput | null> | null;
-  or?: Array<ModelProductConditionInput | null> | null;
-  not?: ModelProductConditionInput | null;
+export type ModelInvoiceConditionInput = {
+  deliveryStartDate?: ModelStringInput | null;
+  deliveryEndDate?: ModelStringInput | null;
+  issueDate?: ModelStringInput | null;
+  and?: Array<ModelInvoiceConditionInput | null> | null;
+  or?: Array<ModelInvoiceConditionInput | null> | null;
+  not?: ModelInvoiceConditionInput | null;
+  invoiceCustomerId?: ModelIDInput | null;
 };
 
-export type Product = {
-  __typename: "Product";
+export type Invoice = {
+  __typename: "Invoice";
   id: string;
-  name: string;
-  Prices?: ModelPriceConnection | null;
+  deliveryStartDate?: string | null;
+  deliveryEndDate?: string | null;
+  issueDate?: string | null;
+  Customer?: Customer | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
+  invoiceCustomerId?: string | null;
 };
 
-export type UpdateProductInput = {
+export type UpdateInvoiceInput = {
   id: string;
-  name?: string | null;
-  _version?: number | null;
+  deliveryStartDate?: string | null;
+  deliveryEndDate?: string | null;
+  issueDate?: string | null;
+  invoiceCustomerId?: string | null;
 };
 
-export type DeleteProductInput = {
+export type DeleteInvoiceInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateCustomerInput = {
   id?: string | null;
   companyName: string;
   ownerName: string;
-  _version?: number | null;
   customerAddressId?: string | null;
 };
 
@@ -276,13 +241,11 @@ export type UpdateCustomerInput = {
   id: string;
   companyName?: string | null;
   ownerName?: string | null;
-  _version?: number | null;
   customerAddressId?: string | null;
 };
 
 export type DeleteCustomerInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateAddressInput = {
@@ -291,7 +254,6 @@ export type CreateAddressInput = {
   number: string;
   zip: string;
   city: string;
-  _version?: number | null;
 };
 
 export type ModelAddressConditionInput = {
@@ -310,12 +272,10 @@ export type UpdateAddressInput = {
   number?: string | null;
   zip?: string | null;
   city?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteAddressInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateInvoiceIssuerCompanyInput = {
@@ -323,7 +283,6 @@ export type CreateInvoiceIssuerCompanyInput = {
   name: string;
   phone: string;
   taxId: string;
-  _version?: number | null;
   invoiceIssuerCompanyAddressId?: string | null;
 };
 
@@ -346,9 +305,6 @@ export type InvoiceIssuerCompany = {
   Address?: Address | null;
   createdAt: string;
   updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
   invoiceIssuerCompanyAddressId?: string | null;
 };
 
@@ -357,20 +313,17 @@ export type UpdateInvoiceIssuerCompanyInput = {
   name?: string | null;
   phone?: string | null;
   taxId?: string | null;
-  _version?: number | null;
   invoiceIssuerCompanyAddressId?: string | null;
 };
 
 export type DeleteInvoiceIssuerCompanyInput = {
   id: string;
-  _version?: number | null;
 };
 
 export type CreateCustomerPriceInput = {
   id?: string | null;
   priceID: string;
   customerID: string;
-  _version?: number | null;
 };
 
 export type ModelCustomerPriceConditionInput = {
@@ -385,12 +338,33 @@ export type UpdateCustomerPriceInput = {
   id: string;
   priceID?: string | null;
   customerID?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteCustomerPriceInput = {
   id: string;
-  _version?: number | null;
+};
+
+export type ModelProductFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  and?: Array<ModelProductFilterInput | null> | null;
+  or?: Array<ModelProductFilterInput | null> | null;
+  not?: ModelProductFilterInput | null;
+};
+
+export type ModelProductConnection = {
+  __typename: "ModelProductConnection";
+  items: Array<Product | null>;
+  nextToken?: string | null;
+};
+
+export type ModelPriceFilterInput = {
+  id?: ModelIDInput | null;
+  price?: ModelFloatInput | null;
+  productID?: ModelIDInput | null;
+  and?: Array<ModelPriceFilterInput | null> | null;
+  or?: Array<ModelPriceFilterInput | null> | null;
+  not?: ModelPriceFilterInput | null;
 };
 
 export type ModelInvoiceFilterInput = {
@@ -408,32 +382,6 @@ export type ModelInvoiceConnection = {
   __typename: "ModelInvoiceConnection";
   items: Array<Invoice | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
-};
-
-export type ModelPriceFilterInput = {
-  id?: ModelIDInput | null;
-  price?: ModelFloatInput | null;
-  productID?: ModelIDInput | null;
-  invoiceID?: ModelIDInput | null;
-  and?: Array<ModelPriceFilterInput | null> | null;
-  or?: Array<ModelPriceFilterInput | null> | null;
-  not?: ModelPriceFilterInput | null;
-};
-
-export type ModelProductFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  and?: Array<ModelProductFilterInput | null> | null;
-  or?: Array<ModelProductFilterInput | null> | null;
-  not?: ModelProductFilterInput | null;
-};
-
-export type ModelProductConnection = {
-  __typename: "ModelProductConnection";
-  items: Array<Product | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelCustomerFilterInput = {
@@ -450,7 +398,6 @@ export type ModelCustomerConnection = {
   __typename: "ModelCustomerConnection";
   items: Array<Customer | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelAddressFilterInput = {
@@ -468,7 +415,6 @@ export type ModelAddressConnection = {
   __typename: "ModelAddressConnection";
   items: Array<Address | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelInvoiceIssuerCompanyFilterInput = {
@@ -486,7 +432,6 @@ export type ModelInvoiceIssuerCompanyConnection = {
   __typename: "ModelInvoiceIssuerCompanyConnection";
   items: Array<InvoiceIssuerCompany | null>;
   nextToken?: string | null;
-  startedAt?: number | null;
 };
 
 export type ModelCustomerPriceFilterInput = {
@@ -496,6 +441,512 @@ export type ModelCustomerPriceFilterInput = {
   and?: Array<ModelCustomerPriceFilterInput | null> | null;
   or?: Array<ModelCustomerPriceFilterInput | null> | null;
   not?: ModelCustomerPriceFilterInput | null;
+};
+
+export type ModelSubscriptionProductFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionProductFilterInput | null> | null;
+  or?: Array<ModelSubscriptionProductFilterInput | null> | null;
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  in?: Array<string | null> | null;
+  notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  in?: Array<string | null> | null;
+  notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionPriceFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  price?: ModelSubscriptionFloatInput | null;
+  productID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionPriceFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPriceFilterInput | null> | null;
+};
+
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  in?: Array<number | null> | null;
+  notIn?: Array<number | null> | null;
+};
+
+export type ModelSubscriptionInvoiceFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  deliveryStartDate?: ModelSubscriptionStringInput | null;
+  deliveryEndDate?: ModelSubscriptionStringInput | null;
+  issueDate?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionInvoiceFilterInput | null> | null;
+  or?: Array<ModelSubscriptionInvoiceFilterInput | null> | null;
+};
+
+export type ModelSubscriptionCustomerFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  companyName?: ModelSubscriptionStringInput | null;
+  ownerName?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionCustomerFilterInput | null> | null;
+  or?: Array<ModelSubscriptionCustomerFilterInput | null> | null;
+};
+
+export type ModelSubscriptionAddressFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  street?: ModelSubscriptionStringInput | null;
+  number?: ModelSubscriptionStringInput | null;
+  zip?: ModelSubscriptionStringInput | null;
+  city?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionAddressFilterInput | null> | null;
+  or?: Array<ModelSubscriptionAddressFilterInput | null> | null;
+};
+
+export type ModelSubscriptionInvoiceIssuerCompanyFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  phone?: ModelSubscriptionStringInput | null;
+  taxId?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionInvoiceIssuerCompanyFilterInput | null> | null;
+  or?: Array<ModelSubscriptionInvoiceIssuerCompanyFilterInput | null> | null;
+};
+
+export type ModelSubscriptionCustomerPriceFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  priceID?: ModelSubscriptionIDInput | null;
+  customerID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionCustomerPriceFilterInput | null> | null;
+  or?: Array<ModelSubscriptionCustomerPriceFilterInput | null> | null;
+};
+
+export type CreateProductMutationVariables = {
+  input: CreateProductInput;
+  condition?: ModelProductConditionInput | null;
+};
+
+export type CreateProductMutation = {
+  createProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type UpdateProductMutationVariables = {
+  input: UpdateProductInput;
+  condition?: ModelProductConditionInput | null;
+};
+
+export type UpdateProductMutation = {
+  updateProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type DeleteProductMutationVariables = {
+  input: DeleteProductInput;
+  condition?: ModelProductConditionInput | null;
+};
+
+export type DeleteProductMutation = {
+  deleteProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type CreatePriceMutationVariables = {
+  input: CreatePriceInput;
+  condition?: ModelPriceConditionInput | null;
+};
+
+export type CreatePriceMutation = {
+  createPrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type UpdatePriceMutationVariables = {
+  input: UpdatePriceInput;
+  condition?: ModelPriceConditionInput | null;
+};
+
+export type UpdatePriceMutation = {
+  updatePrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type DeletePriceMutationVariables = {
+  input: DeletePriceInput;
+  condition?: ModelPriceConditionInput | null;
+};
+
+export type DeletePriceMutation = {
+  deletePrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type CreateInvoiceMutationVariables = {
@@ -524,9 +975,6 @@ export type CreateInvoiceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -538,19 +986,14 @@ export type CreateInvoiceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -566,100 +1009,26 @@ export type CreateInvoiceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
 };
@@ -690,9 +1059,6 @@ export type UpdateInvoiceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -704,19 +1070,14 @@ export type UpdateInvoiceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -732,100 +1093,26 @@ export type UpdateInvoiceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
 };
@@ -856,9 +1143,6 @@ export type DeleteInvoiceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -870,19 +1154,14 @@ export type DeleteInvoiceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -898,641 +1177,27 @@ export type DeleteInvoiceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
-  } | null;
-};
-
-export type CreatePriceMutationVariables = {
-  input: CreatePriceInput;
-  condition?: ModelPriceConditionInput | null;
-};
-
-export type CreatePriceMutation = {
-  createPrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type UpdatePriceMutationVariables = {
-  input: UpdatePriceInput;
-  condition?: ModelPriceConditionInput | null;
-};
-
-export type UpdatePriceMutation = {
-  updatePrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type DeletePriceMutationVariables = {
-  input: DeletePriceInput;
-  condition?: ModelPriceConditionInput | null;
-};
-
-export type DeletePriceMutation = {
-  deletePrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type CreateProductMutationVariables = {
-  input: CreateProductInput;
-  condition?: ModelProductConditionInput | null;
-};
-
-export type CreateProductMutation = {
-  createProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type UpdateProductMutationVariables = {
-  input: UpdateProductInput;
-  condition?: ModelProductConditionInput | null;
-};
-
-export type UpdateProductMutation = {
-  updateProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type DeleteProductMutationVariables = {
-  input: DeleteProductInput;
-  condition?: ModelProductConditionInput | null;
-};
-
-export type DeleteProductMutation = {
-  deleteProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -1556,9 +1221,6 @@ export type CreateCustomerMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -1570,9 +1232,8 @@ export type CreateCustomerMutation = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -1582,18 +1243,11 @@ export type CreateCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -1609,9 +1263,6 @@ export type CreateCustomerMutation = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -1622,34 +1273,20 @@ export type CreateCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
 };
@@ -1674,9 +1311,6 @@ export type UpdateCustomerMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -1688,9 +1322,8 @@ export type UpdateCustomerMutation = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -1700,18 +1333,11 @@ export type UpdateCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -1727,9 +1353,6 @@ export type UpdateCustomerMutation = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -1740,34 +1363,20 @@ export type UpdateCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
 };
@@ -1792,9 +1401,6 @@ export type DeleteCustomerMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -1806,9 +1412,8 @@ export type DeleteCustomerMutation = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -1818,18 +1423,11 @@ export type DeleteCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -1845,9 +1443,6 @@ export type DeleteCustomerMutation = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -1858,34 +1453,20 @@ export type DeleteCustomerMutation = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
 };
@@ -1905,9 +1486,6 @@ export type CreateAddressMutation = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -1926,9 +1504,6 @@ export type UpdateAddressMutation = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -1947,9 +1522,6 @@ export type DeleteAddressMutation = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -1974,15 +1546,9 @@ export type CreateInvoiceIssuerCompanyMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
 };
@@ -2008,15 +1574,9 @@ export type UpdateInvoiceIssuerCompanyMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
 };
@@ -2042,15 +1602,9 @@ export type DeleteInvoiceIssuerCompanyMutation = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
 };
@@ -2069,9 +1623,8 @@ export type CreateCustomerPriceMutation = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -2082,19 +1635,14 @@ export type CreateCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2110,36 +1658,22 @@ export type CreateCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -2155,9 +1689,6 @@ export type CreateCustomerPriceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -2169,19 +1700,14 @@ export type CreateCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2197,43 +1723,26 @@ export type CreateCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -2251,9 +1760,8 @@ export type UpdateCustomerPriceMutation = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -2264,19 +1772,14 @@ export type UpdateCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2292,36 +1795,22 @@ export type UpdateCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -2337,9 +1826,6 @@ export type UpdateCustomerPriceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -2351,19 +1837,14 @@ export type UpdateCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2379,43 +1860,26 @@ export type UpdateCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -2433,9 +1897,8 @@ export type DeleteCustomerPriceMutation = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -2446,19 +1909,14 @@ export type DeleteCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2474,36 +1932,22 @@ export type DeleteCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -2519,9 +1963,6 @@ export type DeleteCustomerPriceMutation = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -2533,19 +1974,14 @@ export type DeleteCustomerPriceMutation = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2561,43 +1997,271 @@ export type DeleteCustomerPriceMutation = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  } | null;
+};
+
+export type GetProductQueryVariables = {
+  id: string;
+};
+
+export type GetProductQuery = {
+  getProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type ListProductsQueryVariables = {
+  filter?: ModelProductFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type ListProductsQuery = {
+  listProducts?: {
+    __typename: "ModelProductConnection";
+    items: Array<{
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type GetPriceQueryVariables = {
+  id: string;
+};
+
+export type GetPriceQuery = {
+  getPrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type ListPricesQueryVariables = {
+  filter?: ModelPriceFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type ListPricesQuery = {
+  listPrices?: {
+    __typename: "ModelPriceConnection";
+    items: Array<{
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -2626,9 +2290,6 @@ export type GetInvoiceQuery = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -2640,19 +2301,14 @@ export type GetInvoiceQuery = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -2668,100 +2324,26 @@ export type GetInvoiceQuery = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
 };
@@ -2795,9 +2377,6 @@ export type ListInvoicesQuery = {
           city: string;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null;
         Prices?: {
           __typename: "ModelCustomerPriceConnection";
@@ -2809,14 +2388,10 @@ export type ListInvoicesQuery = {
             price: {
               __typename: "Price";
               id: string;
-              price: number;
+              price?: number | null;
               productID: string;
-              invoiceID?: string | null;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             };
             customer: {
               __typename: "Customer";
@@ -2825,667 +2400,22 @@ export type ListInvoicesQuery = {
               ownerName: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
               customerAddressId?: string | null;
             };
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null>;
           nextToken?: string | null;
-          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
         customerAddressId?: string | null;
-      } | null;
-      Prices?: {
-        __typename: "ModelPriceConnection";
-        items: Array<{
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       invoiceCustomerId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncInvoicesQueryVariables = {
-  filter?: ModelInvoiceFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncInvoicesQuery = {
-  syncInvoices?: {
-    __typename: "ModelInvoiceConnection";
-    items: Array<{
-      __typename: "Invoice";
-      id: string;
-      deliveryStartDate?: string | null;
-      deliveryEndDate?: string | null;
-      issueDate?: string | null;
-      Customer?: {
-        __typename: "Customer";
-        id: string;
-        companyName: string;
-        ownerName: string;
-        Address?: {
-          __typename: "Address";
-          id: string;
-          street: string;
-          number: string;
-          zip: string;
-          city: string;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null;
-        Prices?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        customerAddressId?: string | null;
-      } | null;
-      Prices?: {
-        __typename: "ModelPriceConnection";
-        items: Array<{
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-      invoiceCustomerId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type GetPriceQueryVariables = {
-  id: string;
-};
-
-export type GetPriceQuery = {
-  getPrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type ListPricesQueryVariables = {
-  filter?: ModelPriceFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type ListPricesQuery = {
-  listPrices?: {
-    __typename: "ModelPriceConnection";
-    items: Array<{
-      __typename: "Price";
-      id: string;
-      price: number;
-      productID: string;
-      invoiceID?: string | null;
-      customers?: {
-        __typename: "ModelCustomerPriceConnection";
-        items: Array<{
-          __typename: "CustomerPrice";
-          id: string;
-          priceID: string;
-          customerID: string;
-          price: {
-            __typename: "Price";
-            id: string;
-            price: number;
-            productID: string;
-            invoiceID?: string | null;
-            customers?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          };
-          customer: {
-            __typename: "Customer";
-            id: string;
-            companyName: string;
-            ownerName: string;
-            Address?: {
-              __typename: "Address";
-              id: string;
-              street: string;
-              number: string;
-              zip: string;
-              city: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null;
-            Prices?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-            customerAddressId?: string | null;
-          };
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncPricesQueryVariables = {
-  filter?: ModelPriceFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncPricesQuery = {
-  syncPrices?: {
-    __typename: "ModelPriceConnection";
-    items: Array<{
-      __typename: "Price";
-      id: string;
-      price: number;
-      productID: string;
-      invoiceID?: string | null;
-      customers?: {
-        __typename: "ModelCustomerPriceConnection";
-        items: Array<{
-          __typename: "CustomerPrice";
-          id: string;
-          priceID: string;
-          customerID: string;
-          price: {
-            __typename: "Price";
-            id: string;
-            price: number;
-            productID: string;
-            invoiceID?: string | null;
-            customers?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          };
-          customer: {
-            __typename: "Customer";
-            id: string;
-            companyName: string;
-            ownerName: string;
-            Address?: {
-              __typename: "Address";
-              id: string;
-              street: string;
-              number: string;
-              zip: string;
-              city: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null;
-            Prices?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-            customerAddressId?: string | null;
-          };
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type GetProductQueryVariables = {
-  id: string;
-};
-
-export type GetProductQuery = {
-  getProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type ListProductsQueryVariables = {
-  filter?: ModelProductFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type ListProductsQuery = {
-  listProducts?: {
-    __typename: "ModelProductConnection";
-    items: Array<{
-      __typename: "Product";
-      id: string;
-      name: string;
-      Prices?: {
-        __typename: "ModelPriceConnection";
-        items: Array<{
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncProductsQueryVariables = {
-  filter?: ModelProductFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncProductsQuery = {
-  syncProducts?: {
-    __typename: "ModelProductConnection";
-    items: Array<{
-      __typename: "Product";
-      id: string;
-      name: string;
-      Prices?: {
-        __typename: "ModelPriceConnection";
-        items: Array<{
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
 };
 
@@ -3508,9 +2438,6 @@ export type GetCustomerQuery = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -3522,9 +2449,8 @@ export type GetCustomerQuery = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -3534,18 +2460,11 @@ export type GetCustomerQuery = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -3561,9 +2480,6 @@ export type GetCustomerQuery = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -3574,34 +2490,20 @@ export type GetCustomerQuery = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
 };
@@ -3629,9 +2531,6 @@ export type ListCustomersQuery = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -3643,19 +2542,14 @@ export type ListCustomersQuery = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -3671,143 +2565,25 @@ export type ListCustomersQuery = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncCustomersQueryVariables = {
-  filter?: ModelCustomerFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncCustomersQuery = {
-  syncCustomers?: {
-    __typename: "ModelCustomerConnection";
-    items: Array<{
-      __typename: "Customer";
-      id: string;
-      companyName: string;
-      ownerName: string;
-      Address?: {
-        __typename: "Address";
-        id: string;
-        street: string;
-        number: string;
-        zip: string;
-        city: string;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      Prices?: {
-        __typename: "ModelCustomerPriceConnection";
-        items: Array<{
-          __typename: "CustomerPrice";
-          id: string;
-          priceID: string;
-          customerID: string;
-          price: {
-            __typename: "Price";
-            id: string;
-            price: number;
-            productID: string;
-            invoiceID?: string | null;
-            customers?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          };
-          customer: {
-            __typename: "Customer";
-            id: string;
-            companyName: string;
-            ownerName: string;
-            Address?: {
-              __typename: "Address";
-              id: string;
-              street: string;
-              number: string;
-              zip: string;
-              city: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null;
-            Prices?: {
-              __typename: "ModelCustomerPriceConnection";
-              nextToken?: string | null;
-              startedAt?: number | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-            customerAddressId?: string | null;
-          };
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null>;
-        nextToken?: string | null;
-        startedAt?: number | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-      customerAddressId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
 };
 
@@ -3825,9 +2601,6 @@ export type GetAddressQuery = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -3849,40 +2622,8 @@ export type ListAddressesQuery = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncAddressesQueryVariables = {
-  filter?: ModelAddressFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncAddressesQuery = {
-  syncAddresses?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      number: string;
-      zip: string;
-      city: string;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
 };
 
@@ -3906,15 +2647,9 @@ export type GetInvoiceIssuerCompanyQuery = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
 };
@@ -3943,60 +2678,12 @@ export type ListInvoiceIssuerCompaniesQuery = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       invoiceIssuerCompanyAddressId?: string | null;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
-};
-
-export type SyncInvoiceIssuerCompaniesQueryVariables = {
-  filter?: ModelInvoiceIssuerCompanyFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
-};
-
-export type SyncInvoiceIssuerCompaniesQuery = {
-  syncInvoiceIssuerCompanies?: {
-    __typename: "ModelInvoiceIssuerCompanyConnection";
-    items: Array<{
-      __typename: "InvoiceIssuerCompany";
-      id: string;
-      name: string;
-      phone: string;
-      taxId: string;
-      Address?: {
-        __typename: "Address";
-        id: string;
-        street: string;
-        number: string;
-        zip: string;
-        city: string;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-      invoiceIssuerCompanyAddressId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
 };
 
@@ -4013,9 +2700,8 @@ export type GetCustomerPriceQuery = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -4026,19 +2712,14 @@ export type GetCustomerPriceQuery = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -4054,36 +2735,22 @@ export type GetCustomerPriceQuery = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -4099,9 +2766,6 @@ export type GetCustomerPriceQuery = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -4113,19 +2777,14 @@ export type GetCustomerPriceQuery = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -4141,43 +2800,26 @@ export type GetCustomerPriceQuery = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };
 
@@ -4198,9 +2840,8 @@ export type ListCustomerPricesQuery = {
       price: {
         __typename: "Price";
         id: string;
-        price: number;
+        price?: number | null;
         productID: string;
-        invoiceID?: string | null;
         customers?: {
           __typename: "ModelCustomerPriceConnection";
           items: Array<{
@@ -4211,14 +2852,10 @@ export type ListCustomerPricesQuery = {
             price: {
               __typename: "Price";
               id: string;
-              price: number;
+              price?: number | null;
               productID: string;
-              invoiceID?: string | null;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             };
             customer: {
               __typename: "Customer";
@@ -4227,25 +2864,15 @@ export type ListCustomerPricesQuery = {
               ownerName: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
               customerAddressId?: string | null;
             };
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null>;
           nextToken?: string | null;
-          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       };
       customer: {
         __typename: "Customer";
@@ -4261,9 +2888,6 @@ export type ListCustomerPricesQuery = {
           city: string;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null;
         Prices?: {
           __typename: "ModelCustomerPriceConnection";
@@ -4275,14 +2899,10 @@ export type ListCustomerPricesQuery = {
             price: {
               __typename: "Price";
               id: string;
-              price: number;
+              price?: number | null;
               productID: string;
-              invoiceID?: string | null;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             };
             customer: {
               __typename: "Customer";
@@ -4291,59 +2911,40 @@ export type ListCustomerPricesQuery = {
               ownerName: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
               customerAddressId?: string | null;
             };
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null>;
           nextToken?: string | null;
-          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
         customerAddressId?: string | null;
       };
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
-    startedAt?: number | null;
   } | null;
 };
 
-export type SyncCustomerPricesQueryVariables = {
-  filter?: ModelCustomerPriceFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  lastSync?: number | null;
+export type OnCreateProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null;
 };
 
-export type SyncCustomerPricesQuery = {
-  syncCustomerPrices?: {
-    __typename: "ModelCustomerPriceConnection";
-    items: Array<{
-      __typename: "CustomerPrice";
-      id: string;
-      priceID: string;
-      customerID: string;
-      price: {
+export type OnCreateProductSubscription = {
+  onCreateProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
         __typename: "Price";
         id: string;
-        price: number;
+        price?: number | null;
         productID: string;
-        invoiceID?: string | null;
         customers?: {
           __typename: "ModelCustomerPriceConnection";
           items: Array<{
@@ -4354,14 +2955,10 @@ export type SyncCustomerPricesQuery = {
             price: {
               __typename: "Price";
               id: string;
-              price: number;
+              price?: number | null;
               productID: string;
-              invoiceID?: string | null;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             };
             customer: {
               __typename: "Customer";
@@ -4370,45 +2967,40 @@ export type SyncCustomerPricesQuery = {
               ownerName: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
               customerAddressId?: string | null;
             };
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null>;
           nextToken?: string | null;
-          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      };
-      customer: {
-        __typename: "Customer";
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type OnUpdateProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null;
+};
+
+export type OnUpdateProductSubscription = {
+  onUpdateProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
         id: string;
-        companyName: string;
-        ownerName: string;
-        Address?: {
-          __typename: "Address";
-          id: string;
-          street: string;
-          number: string;
-          zip: string;
-          city: string;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        } | null;
-        Prices?: {
+        price?: number | null;
+        productID: string;
+        customers?: {
           __typename: "ModelCustomerPriceConnection";
           items: Array<{
             __typename: "CustomerPrice";
@@ -4418,14 +3010,10 @@ export type SyncCustomerPricesQuery = {
             price: {
               __typename: "Price";
               id: string;
-              price: number;
+              price?: number | null;
               productID: string;
-              invoiceID?: string | null;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             };
             customer: {
               __typename: "Customer";
@@ -4434,36 +3022,314 @@ export type SyncCustomerPricesQuery = {
               ownerName: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
               customerAddressId?: string | null;
             };
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null>;
           nextToken?: string | null;
-          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-        customerAddressId?: string | null;
-      };
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+};
+
+export type OnDeleteProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null;
+};
+
+export type OnDeleteProductSubscription = {
+  onDeleteProduct?: {
+    __typename: "Product";
+    id: string;
+    name?: string | null;
+    Prices?: {
+      __typename: "ModelPriceConnection";
+      items: Array<{
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type OnCreatePriceSubscriptionVariables = {
+  filter?: ModelSubscriptionPriceFilterInput | null;
+};
+
+export type OnCreatePriceSubscription = {
+  onCreatePrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type OnUpdatePriceSubscriptionVariables = {
+  filter?: ModelSubscriptionPriceFilterInput | null;
+};
+
+export type OnUpdatePriceSubscription = {
+  onUpdatePrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type OnDeletePriceSubscriptionVariables = {
+  filter?: ModelSubscriptionPriceFilterInput | null;
+};
+
+export type OnDeletePriceSubscription = {
+  onDeletePrice?: {
+    __typename: "Price";
+    id: string;
+    price?: number | null;
+    productID: string;
+    customers?: {
+      __typename: "ModelCustomerPriceConnection";
+      items: Array<{
+        __typename: "CustomerPrice";
+        id: string;
+        priceID: string;
+        customerID: string;
+        price: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        customer: {
+          __typename: "Customer";
+          id: string;
+          companyName: string;
+          ownerName: string;
+          Address?: {
+            __typename: "Address";
+            id: string;
+            street: string;
+            number: string;
+            zip: string;
+            city: string;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Prices?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+          customerAddressId?: string | null;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
+export type OnCreateInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null;
 };
 
 export type OnCreateInvoiceSubscription = {
@@ -4487,9 +3353,6 @@ export type OnCreateInvoiceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -4501,19 +3364,14 @@ export type OnCreateInvoiceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -4529,102 +3387,32 @@ export type OnCreateInvoiceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
+};
+
+export type OnUpdateInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null;
 };
 
 export type OnUpdateInvoiceSubscription = {
@@ -4648,9 +3436,6 @@ export type OnUpdateInvoiceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -4662,19 +3447,14 @@ export type OnUpdateInvoiceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -4690,102 +3470,32 @@ export type OnUpdateInvoiceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
+};
+
+export type OnDeleteInvoiceSubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceFilterInput | null;
 };
 
 export type OnDeleteInvoiceSubscription = {
@@ -4809,9 +3519,6 @@ export type OnDeleteInvoiceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -4823,19 +3530,14 @@ export type OnDeleteInvoiceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -4851,612 +3553,32 @@ export type OnDeleteInvoiceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
-    } | null;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceCustomerId?: string | null;
   } | null;
 };
 
-export type OnCreatePriceSubscription = {
-  onCreatePrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type OnUpdatePriceSubscription = {
-  onUpdatePrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type OnDeletePriceSubscription = {
-  onDeletePrice?: {
-    __typename: "Price";
-    id: string;
-    price: number;
-    productID: string;
-    invoiceID?: string | null;
-    customers?: {
-      __typename: "ModelCustomerPriceConnection";
-      items: Array<{
-        __typename: "CustomerPrice";
-        id: string;
-        priceID: string;
-        customerID: string;
-        price: {
-          __typename: "Price";
-          id: string;
-          price: number;
-          productID: string;
-          invoiceID?: string | null;
-          customers?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-        };
-        customer: {
-          __typename: "Customer";
-          id: string;
-          companyName: string;
-          ownerName: string;
-          Address?: {
-            __typename: "Address";
-            id: string;
-            street: string;
-            number: string;
-            zip: string;
-            city: string;
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null;
-          Prices?: {
-            __typename: "ModelCustomerPriceConnection";
-            items: Array<{
-              __typename: "CustomerPrice";
-              id: string;
-              priceID: string;
-              customerID: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            } | null>;
-            nextToken?: string | null;
-            startedAt?: number | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
-          customerAddressId?: string | null;
-        };
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type OnCreateProductSubscription = {
-  onCreateProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type OnUpdateProductSubscription = {
-  onUpdateProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
-};
-
-export type OnDeleteProductSubscription = {
-  onDeleteProduct?: {
-    __typename: "Product";
-    id: string;
-    name: string;
-    Prices?: {
-      __typename: "ModelPriceConnection";
-      items: Array<{
-        __typename: "Price";
-        id: string;
-        price: number;
-        productID: string;
-        invoiceID?: string | null;
-        customers?: {
-          __typename: "ModelCustomerPriceConnection";
-          items: Array<{
-            __typename: "CustomerPrice";
-            id: string;
-            priceID: string;
-            customerID: string;
-            price: {
-              __typename: "Price";
-              id: string;
-              price: number;
-              productID: string;
-              invoiceID?: string | null;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-            };
-            customer: {
-              __typename: "Customer";
-              id: string;
-              companyName: string;
-              ownerName: string;
-              createdAt: string;
-              updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
-              customerAddressId?: string | null;
-            };
-            createdAt: string;
-            updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
-          } | null>;
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      } | null>;
-      nextToken?: string | null;
-      startedAt?: number | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
-  } | null;
+export type OnCreateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null;
 };
 
 export type OnCreateCustomerSubscription = {
@@ -5474,9 +3596,6 @@ export type OnCreateCustomerSubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -5488,9 +3607,8 @@ export type OnCreateCustomerSubscription = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -5500,18 +3618,11 @@ export type OnCreateCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -5527,9 +3638,6 @@ export type OnCreateCustomerSubscription = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -5540,36 +3648,26 @@ export type OnCreateCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
+};
+
+export type OnUpdateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null;
 };
 
 export type OnUpdateCustomerSubscription = {
@@ -5587,9 +3685,6 @@ export type OnUpdateCustomerSubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -5601,9 +3696,8 @@ export type OnUpdateCustomerSubscription = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -5613,18 +3707,11 @@ export type OnUpdateCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -5640,9 +3727,6 @@ export type OnUpdateCustomerSubscription = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -5653,36 +3737,26 @@ export type OnUpdateCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
+};
+
+export type OnDeleteCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null;
 };
 
 export type OnDeleteCustomerSubscription = {
@@ -5700,9 +3774,6 @@ export type OnDeleteCustomerSubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     Prices?: {
       __typename: "ModelCustomerPriceConnection";
@@ -5714,9 +3785,8 @@ export type OnDeleteCustomerSubscription = {
         price: {
           __typename: "Price";
           id: string;
-          price: number;
+          price?: number | null;
           productID: string;
-          invoiceID?: string | null;
           customers?: {
             __typename: "ModelCustomerPriceConnection";
             items: Array<{
@@ -5726,18 +3796,11 @@ export type OnDeleteCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         };
         customer: {
           __typename: "Customer";
@@ -5753,9 +3816,6 @@ export type OnDeleteCustomerSubscription = {
             city: string;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           } | null;
           Prices?: {
             __typename: "ModelCustomerPriceConnection";
@@ -5766,36 +3826,26 @@ export type OnDeleteCustomerSubscription = {
               customerID: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null>;
             nextToken?: string | null;
-            startedAt?: number | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
           customerAddressId?: string | null;
         };
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
-      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     customerAddressId?: string | null;
   } | null;
+};
+
+export type OnCreateAddressSubscriptionVariables = {
+  filter?: ModelSubscriptionAddressFilterInput | null;
 };
 
 export type OnCreateAddressSubscription = {
@@ -5808,10 +3858,11 @@ export type OnCreateAddressSubscription = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
+};
+
+export type OnUpdateAddressSubscriptionVariables = {
+  filter?: ModelSubscriptionAddressFilterInput | null;
 };
 
 export type OnUpdateAddressSubscription = {
@@ -5824,10 +3875,11 @@ export type OnUpdateAddressSubscription = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
+};
+
+export type OnDeleteAddressSubscriptionVariables = {
+  filter?: ModelSubscriptionAddressFilterInput | null;
 };
 
 export type OnDeleteAddressSubscription = {
@@ -5840,10 +3892,11 @@ export type OnDeleteAddressSubscription = {
     city: string;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
+};
+
+export type OnCreateInvoiceIssuerCompanySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceIssuerCompanyFilterInput | null;
 };
 
 export type OnCreateInvoiceIssuerCompanySubscription = {
@@ -5862,17 +3915,15 @@ export type OnCreateInvoiceIssuerCompanySubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
+};
+
+export type OnUpdateInvoiceIssuerCompanySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceIssuerCompanyFilterInput | null;
 };
 
 export type OnUpdateInvoiceIssuerCompanySubscription = {
@@ -5891,17 +3942,15 @@ export type OnUpdateInvoiceIssuerCompanySubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
+};
+
+export type OnDeleteInvoiceIssuerCompanySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceIssuerCompanyFilterInput | null;
 };
 
 export type OnDeleteInvoiceIssuerCompanySubscription = {
@@ -5920,17 +3969,15 @@ export type OnDeleteInvoiceIssuerCompanySubscription = {
       city: string;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     } | null;
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
     invoiceIssuerCompanyAddressId?: string | null;
   } | null;
+};
+
+export type OnCreateCustomerPriceSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerPriceFilterInput | null;
 };
 
 export type OnCreateCustomerPriceSubscription = {
@@ -5942,9 +3989,8 @@ export type OnCreateCustomerPriceSubscription = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -5955,19 +4001,14 @@ export type OnCreateCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -5983,36 +4024,22 @@ export type OnCreateCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -6028,9 +4055,6 @@ export type OnCreateCustomerPriceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -6042,19 +4066,14 @@ export type OnCreateCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -6070,44 +4089,31 @@ export type OnCreateCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
+};
+
+export type OnUpdateCustomerPriceSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerPriceFilterInput | null;
 };
 
 export type OnUpdateCustomerPriceSubscription = {
@@ -6119,9 +4125,8 @@ export type OnUpdateCustomerPriceSubscription = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -6132,19 +4137,14 @@ export type OnUpdateCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -6160,36 +4160,22 @@ export type OnUpdateCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -6205,9 +4191,6 @@ export type OnUpdateCustomerPriceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -6219,19 +4202,14 @@ export type OnUpdateCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -6247,44 +4225,31 @@ export type OnUpdateCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
+};
+
+export type OnDeleteCustomerPriceSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerPriceFilterInput | null;
 };
 
 export type OnDeleteCustomerPriceSubscription = {
@@ -6296,9 +4261,8 @@ export type OnDeleteCustomerPriceSubscription = {
     price: {
       __typename: "Price";
       id: string;
-      price: number;
+      price?: number | null;
       productID: string;
-      invoiceID?: string | null;
       customers?: {
         __typename: "ModelCustomerPriceConnection";
         items: Array<{
@@ -6309,19 +4273,14 @@ export type OnDeleteCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -6337,36 +4296,22 @@ export type OnDeleteCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
     };
     customer: {
       __typename: "Customer";
@@ -6382,9 +4327,6 @@ export type OnDeleteCustomerPriceSubscription = {
         city: string;
         createdAt: string;
         updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
       } | null;
       Prices?: {
         __typename: "ModelCustomerPriceConnection";
@@ -6396,19 +4338,14 @@ export type OnDeleteCustomerPriceSubscription = {
           price: {
             __typename: "Price";
             id: string;
-            price: number;
+            price?: number | null;
             productID: string;
-            invoiceID?: string | null;
             customers?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
           };
           customer: {
             __typename: "Customer";
@@ -6424,42 +4361,25 @@ export type OnDeleteCustomerPriceSubscription = {
               city: string;
               createdAt: string;
               updatedAt: string;
-              _version: number;
-              _deleted?: boolean | null;
-              _lastChangedAt: number;
             } | null;
             Prices?: {
               __typename: "ModelCustomerPriceConnection";
               nextToken?: string | null;
-              startedAt?: number | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-            _version: number;
-            _deleted?: boolean | null;
-            _lastChangedAt: number;
             customerAddressId?: string | null;
           };
           createdAt: string;
           updatedAt: string;
-          _version: number;
-          _deleted?: boolean | null;
-          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
-        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
       customerAddressId?: string | null;
     };
     createdAt: string;
     updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
   } | null;
 };

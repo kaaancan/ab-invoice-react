@@ -45,20 +45,6 @@ export const schema = {
                         "targetName": "invoiceCustomerId"
                     }
                 },
-                "Prices": {
-                    "name": "Prices",
-                    "isArray": true,
-                    "type": {
-                        "model": "Price"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "invoiceID"
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -317,7 +303,7 @@ export const schema = {
                     "name": "invoiceID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "customers": {
@@ -644,5 +630,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "95b5fca2d74b807d221b92c13bac21d2"
+    "version": "67499d3699eb5521614a9c9c9516e77b"
 };

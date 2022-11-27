@@ -1,27 +1,25 @@
-type Invoice @model @auth(rules: [{allow: public}]) {
+type Product @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String
+  Prices: [Price] @hasMany(indexName: "byProduct", fields: ["id"])
+}
+
+type Price @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  price: Float
+  productID: ID! @index(name: "byProduct")
+  customers: [Customer] @manyToMany(relationName: "CustomerPrice")
+}
+
+type Invoice @model @auth(rules: [{allow: private}]) {
   id: ID!
   deliveryStartDate: AWSDate
   deliveryEndDate: AWSDate
   issueDate: AWSDate
   Customer: Customer @hasOne
-  Prices: [Price] @hasMany(indexName: "byInvoice", fields: ["id"])
 }
 
-type Price @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  price: Float!
-  productID: ID! @index(name: "byProduct")
-  invoiceID: ID @index(name: "byInvoice")
-  customers: [Customer] @manyToMany(relationName: "CustomerPrice")
-}
-
-type Product @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  name: String!
-  Prices: [Price] @hasMany(indexName: "byProduct", fields: ["id"])
-}
-
-type Customer @model @auth(rules: [{allow: public}]) {
+type Customer @model @auth(rules: [{allow: private}]) {
   id: ID!
   companyName: String!
   ownerName: String!
@@ -29,7 +27,7 @@ type Customer @model @auth(rules: [{allow: public}]) {
   Prices: [Price] @manyToMany(relationName: "CustomerPrice")
 }
 
-type Address @model @auth(rules: [{allow: public}]) {
+type Address @model @auth(rules: [{allow: private}]) {
   id: ID!
   street: String!
   number: String!
@@ -37,7 +35,7 @@ type Address @model @auth(rules: [{allow: public}]) {
   city: String!
 }
 
-type InvoiceIssuerCompany @model @auth(rules: [{allow: public}]) {
+type InvoiceIssuerCompany @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
   phone: String!

@@ -2,9 +2,339 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateProduct = /* GraphQL */ `
+  subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onCreateProduct(filter: $filter) {
+      id
+      name
+      Prices {
+        items {
+          id
+          price
+          productID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProduct = /* GraphQL */ `
+  subscription OnUpdateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onUpdateProduct(filter: $filter) {
+      id
+      name
+      Prices {
+        items {
+          id
+          price
+          productID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProduct = /* GraphQL */ `
+  subscription OnDeleteProduct($filter: ModelSubscriptionProductFilterInput) {
+    onDeleteProduct(filter: $filter) {
+      id
+      name
+      Prices {
+        items {
+          id
+          price
+          productID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePrice = /* GraphQL */ `
+  subscription OnCreatePrice($filter: ModelSubscriptionPriceFilterInput) {
+    onCreatePrice(filter: $filter) {
+      id
+      price
+      productID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePrice = /* GraphQL */ `
+  subscription OnUpdatePrice($filter: ModelSubscriptionPriceFilterInput) {
+    onUpdatePrice(filter: $filter) {
+      id
+      price
+      productID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePrice = /* GraphQL */ `
+  subscription OnDeletePrice($filter: ModelSubscriptionPriceFilterInput) {
+    onDeletePrice(filter: $filter) {
+      id
+      price
+      productID
+      customers {
+        items {
+          id
+          priceID
+          customerID
+          price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customer {
+            id
+            companyName
+            ownerName
+            Address {
+              id
+              street
+              number
+              zip
+              city
+              createdAt
+              updatedAt
+            }
+            Prices {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+            customerAddressId
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateInvoice = /* GraphQL */ `
-  subscription OnCreateInvoice {
-    onCreateInvoice {
+  subscription OnCreateInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
+    onCreateInvoice(filter: $filter) {
       id
       deliveryStartDate
       deliveryEndDate
@@ -21,9 +351,6 @@ export const onCreateInvoice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -34,16 +361,11 @@ export const onCreateInvoice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -57,100 +379,32 @@ export const onCreateInvoice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
-      }
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceCustomerId
     }
   }
 `;
 export const onUpdateInvoice = /* GraphQL */ `
-  subscription OnUpdateInvoice {
-    onUpdateInvoice {
+  subscription OnUpdateInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
+    onUpdateInvoice(filter: $filter) {
       id
       deliveryStartDate
       deliveryEndDate
@@ -167,9 +421,6 @@ export const onUpdateInvoice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -180,16 +431,11 @@ export const onUpdateInvoice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -203,100 +449,32 @@ export const onUpdateInvoice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
-      }
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceCustomerId
     }
   }
 `;
 export const onDeleteInvoice = /* GraphQL */ `
-  subscription OnDeleteInvoice {
-    onDeleteInvoice {
+  subscription OnDeleteInvoice($filter: ModelSubscriptionInvoiceFilterInput) {
+    onDeleteInvoice(filter: $filter) {
       id
       deliveryStartDate
       deliveryEndDate
@@ -313,9 +491,6 @@ export const onDeleteInvoice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -326,16 +501,11 @@ export const onDeleteInvoice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -349,565 +519,32 @@ export const onDeleteInvoice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
-      }
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceCustomerId
     }
   }
 `;
-export const onCreatePrice = /* GraphQL */ `
-  subscription OnCreatePrice {
-    onCreatePrice {
-      id
-      price
-      productID
-      invoiceID
-      customers {
-        items {
-          id
-          priceID
-          customerID
-          price {
-            id
-            price
-            productID
-            invoiceID
-            customers {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          customer {
-            id
-            companyName
-            ownerName
-            Address {
-              id
-              street
-              number
-              zip
-              city
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Prices {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            customerAddressId
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdatePrice = /* GraphQL */ `
-  subscription OnUpdatePrice {
-    onUpdatePrice {
-      id
-      price
-      productID
-      invoiceID
-      customers {
-        items {
-          id
-          priceID
-          customerID
-          price {
-            id
-            price
-            productID
-            invoiceID
-            customers {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          customer {
-            id
-            companyName
-            ownerName
-            Address {
-              id
-              street
-              number
-              zip
-              city
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Prices {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            customerAddressId
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeletePrice = /* GraphQL */ `
-  subscription OnDeletePrice {
-    onDeletePrice {
-      id
-      price
-      productID
-      invoiceID
-      customers {
-        items {
-          id
-          priceID
-          customerID
-          price {
-            id
-            price
-            productID
-            invoiceID
-            customers {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          customer {
-            id
-            companyName
-            ownerName
-            Address {
-              id
-              street
-              number
-              zip
-              city
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            Prices {
-              items {
-                id
-                priceID
-                customerID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            customerAddressId
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct {
-    onCreateProduct {
-      id
-      name
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct {
-    onUpdateProduct {
-      id
-      name
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct {
-    onDeleteProduct {
-      id
-      name
-      Prices {
-        items {
-          id
-          price
-          productID
-          invoiceID
-          customers {
-            items {
-              id
-              priceID
-              customerID
-              price {
-                id
-                price
-                productID
-                invoiceID
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              customer {
-                id
-                companyName
-                ownerName
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-                customerAddressId
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
 export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer {
-    onCreateCustomer {
+  subscription OnCreateCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onCreateCustomer(filter: $filter) {
       id
       companyName
       ownerName
@@ -919,9 +556,6 @@ export const onCreateCustomer = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       Prices {
         items {
@@ -932,7 +566,6 @@ export const onCreateCustomer = /* GraphQL */ `
             id
             price
             productID
-            invoiceID
             customers {
               items {
                 id
@@ -940,18 +573,11 @@ export const onCreateCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           customer {
             id
@@ -965,9 +591,6 @@ export const onCreateCustomer = /* GraphQL */ `
               city
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             Prices {
               items {
@@ -976,41 +599,27 @@ export const onCreateCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             customerAddressId
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       customerAddressId
     }
   }
 `;
 export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer {
-    onUpdateCustomer {
+  subscription OnUpdateCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onUpdateCustomer(filter: $filter) {
       id
       companyName
       ownerName
@@ -1022,9 +631,6 @@ export const onUpdateCustomer = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       Prices {
         items {
@@ -1035,7 +641,6 @@ export const onUpdateCustomer = /* GraphQL */ `
             id
             price
             productID
-            invoiceID
             customers {
               items {
                 id
@@ -1043,18 +648,11 @@ export const onUpdateCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           customer {
             id
@@ -1068,9 +666,6 @@ export const onUpdateCustomer = /* GraphQL */ `
               city
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             Prices {
               items {
@@ -1079,41 +674,27 @@ export const onUpdateCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             customerAddressId
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       customerAddressId
     }
   }
 `;
 export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer {
-    onDeleteCustomer {
+  subscription OnDeleteCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onDeleteCustomer(filter: $filter) {
       id
       companyName
       ownerName
@@ -1125,9 +706,6 @@ export const onDeleteCustomer = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       Prices {
         items {
@@ -1138,7 +716,6 @@ export const onDeleteCustomer = /* GraphQL */ `
             id
             price
             productID
-            invoiceID
             customers {
               items {
                 id
@@ -1146,18 +723,11 @@ export const onDeleteCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           customer {
             id
@@ -1171,9 +741,6 @@ export const onDeleteCustomer = /* GraphQL */ `
               city
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             Prices {
               items {
@@ -1182,41 +749,27 @@ export const onDeleteCustomer = /* GraphQL */ `
                 customerID
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               nextToken
-              startedAt
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
             customerAddressId
           }
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       customerAddressId
     }
   }
 `;
 export const onCreateAddress = /* GraphQL */ `
-  subscription OnCreateAddress {
-    onCreateAddress {
+  subscription OnCreateAddress($filter: ModelSubscriptionAddressFilterInput) {
+    onCreateAddress(filter: $filter) {
       id
       street
       number
@@ -1224,15 +777,12 @@ export const onCreateAddress = /* GraphQL */ `
       city
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
 export const onUpdateAddress = /* GraphQL */ `
-  subscription OnUpdateAddress {
-    onUpdateAddress {
+  subscription OnUpdateAddress($filter: ModelSubscriptionAddressFilterInput) {
+    onUpdateAddress(filter: $filter) {
       id
       street
       number
@@ -1240,15 +790,12 @@ export const onUpdateAddress = /* GraphQL */ `
       city
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
 export const onDeleteAddress = /* GraphQL */ `
-  subscription OnDeleteAddress {
-    onDeleteAddress {
+  subscription OnDeleteAddress($filter: ModelSubscriptionAddressFilterInput) {
+    onDeleteAddress(filter: $filter) {
       id
       street
       number
@@ -1256,15 +803,14 @@ export const onDeleteAddress = /* GraphQL */ `
       city
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
 export const onCreateInvoiceIssuerCompany = /* GraphQL */ `
-  subscription OnCreateInvoiceIssuerCompany {
-    onCreateInvoiceIssuerCompany {
+  subscription OnCreateInvoiceIssuerCompany(
+    $filter: ModelSubscriptionInvoiceIssuerCompanyFilterInput
+  ) {
+    onCreateInvoiceIssuerCompany(filter: $filter) {
       id
       name
       phone
@@ -1277,22 +823,18 @@ export const onCreateInvoiceIssuerCompany = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceIssuerCompanyAddressId
     }
   }
 `;
 export const onUpdateInvoiceIssuerCompany = /* GraphQL */ `
-  subscription OnUpdateInvoiceIssuerCompany {
-    onUpdateInvoiceIssuerCompany {
+  subscription OnUpdateInvoiceIssuerCompany(
+    $filter: ModelSubscriptionInvoiceIssuerCompanyFilterInput
+  ) {
+    onUpdateInvoiceIssuerCompany(filter: $filter) {
       id
       name
       phone
@@ -1305,22 +847,18 @@ export const onUpdateInvoiceIssuerCompany = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceIssuerCompanyAddressId
     }
   }
 `;
 export const onDeleteInvoiceIssuerCompany = /* GraphQL */ `
-  subscription OnDeleteInvoiceIssuerCompany {
-    onDeleteInvoiceIssuerCompany {
+  subscription OnDeleteInvoiceIssuerCompany(
+    $filter: ModelSubscriptionInvoiceIssuerCompanyFilterInput
+  ) {
+    onDeleteInvoiceIssuerCompany(filter: $filter) {
       id
       name
       phone
@@ -1333,22 +871,18 @@ export const onDeleteInvoiceIssuerCompany = /* GraphQL */ `
         city
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       invoiceIssuerCompanyAddressId
     }
   }
 `;
 export const onCreateCustomerPrice = /* GraphQL */ `
-  subscription OnCreateCustomerPrice {
-    onCreateCustomerPrice {
+  subscription OnCreateCustomerPrice(
+    $filter: ModelSubscriptionCustomerPriceFilterInput
+  ) {
+    onCreateCustomerPrice(filter: $filter) {
       id
       priceID
       customerID
@@ -1356,7 +890,6 @@ export const onCreateCustomerPrice = /* GraphQL */ `
         id
         price
         productID
-        invoiceID
         customers {
           items {
             id
@@ -1366,16 +899,11 @@ export const onCreateCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1389,35 +917,21 @@ export const onCreateCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       customer {
         id
@@ -1431,9 +945,6 @@ export const onCreateCustomerPrice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -1444,16 +955,11 @@ export const onCreateCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1467,48 +973,33 @@ export const onCreateCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
 export const onUpdateCustomerPrice = /* GraphQL */ `
-  subscription OnUpdateCustomerPrice {
-    onUpdateCustomerPrice {
+  subscription OnUpdateCustomerPrice(
+    $filter: ModelSubscriptionCustomerPriceFilterInput
+  ) {
+    onUpdateCustomerPrice(filter: $filter) {
       id
       priceID
       customerID
@@ -1516,7 +1007,6 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
         id
         price
         productID
-        invoiceID
         customers {
           items {
             id
@@ -1526,16 +1016,11 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1549,35 +1034,21 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       customer {
         id
@@ -1591,9 +1062,6 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -1604,16 +1072,11 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1627,48 +1090,33 @@ export const onUpdateCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
 export const onDeleteCustomerPrice = /* GraphQL */ `
-  subscription OnDeleteCustomerPrice {
-    onDeleteCustomerPrice {
+  subscription OnDeleteCustomerPrice(
+    $filter: ModelSubscriptionCustomerPriceFilterInput
+  ) {
+    onDeleteCustomerPrice(filter: $filter) {
       id
       priceID
       customerID
@@ -1676,7 +1124,6 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
         id
         price
         productID
-        invoiceID
         customers {
           items {
             id
@@ -1686,16 +1133,11 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1709,35 +1151,21 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       customer {
         id
@@ -1751,9 +1179,6 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
           city
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Prices {
           items {
@@ -1764,16 +1189,11 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
               id
               price
               productID
-              invoiceID
               customers {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             customer {
               id
@@ -1787,42 +1207,25 @@ export const onDeleteCustomerPrice = /* GraphQL */ `
                 city
                 createdAt
                 updatedAt
-                _version
-                _deleted
-                _lastChangedAt
               }
               Prices {
                 nextToken
-                startedAt
               }
               createdAt
               updatedAt
-              _version
-              _deleted
-              _lastChangedAt
               customerAddressId
             }
             createdAt
             updatedAt
-            _version
-            _deleted
-            _lastChangedAt
           }
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         customerAddressId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

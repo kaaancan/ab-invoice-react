@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import { Customer, Product } from "../API";
+import { Customer, Invoice, Product } from "../API";
 
 import "./InvoiceCreate.css";
 import { Button, Select, TextInput } from "@mantine/core";
@@ -21,13 +21,12 @@ export const InvoiceCreate = memo(function InvoiceCreate(
 ): React.ReactElement {
   const { customers, products } = props;
 
+  const [createInvoices, setCreateInvoice] = useState<Invoice[]>();
+
   const [currentCustomer, setCurrentCustomer] = useState<Customer>({
     Address: undefined,
     Prices: undefined,
     __typename: "Customer",
-    _deleted: undefined,
-    _lastChangedAt: 0,
-    _version: 0,
     companyName: "",
     createdAt: "",
     customerAddressId: undefined,
@@ -80,24 +79,22 @@ export const InvoiceCreate = memo(function InvoiceCreate(
 
       <div className={"productInputWrapper"}>
         {currentCustomer.Prices !== null &&
-          currentCustomer.Prices?.items
-            .filter((productWithPrice) => !productWithPrice?._deleted)
-            .map((productWithPrice, index) => {
-              const productForPrice: Product | undefined = find(products, {
-                id: productWithPrice?.price.productID || "",
-              });
-              if (productWithPrice !== null && productForPrice !== undefined) {
-                return (
-                  <div className={"productInput"} key={index}>
-                    <TextInput style={{ width: 50 }} />
-                    <div>
-                      {formatNumberToEuro(productWithPrice.price.price)}
-                    </div>
-                    <div>{productForPrice.name}</div>
+          currentCustomer.Prices?.items.map((productWithPrice, index) => {
+            const productForPrice: Product | undefined = find(products, {
+              id: productWithPrice?.price.productID || "",
+            });
+            if (productWithPrice !== null && productForPrice !== undefined) {
+              return (
+                <div className={"productInput"} key={index}>
+                  <TextInput style={{ width: 50 }} />
+                  <div>
+                    {formatNumberToEuro(productWithPrice.price.price || 0)}
                   </div>
-                );
-              }
-            })}
+                  <div>{productForPrice.name}</div>
+                </div>
+              );
+            }
+          })}
       </div>
       <div className={"customerNavigationButtons"}>
         {currentCustomerIndex > 0 && (

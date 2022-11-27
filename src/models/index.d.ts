@@ -34,7 +34,6 @@ export declare class Invoice {
   readonly deliveryEndDate?: string | null;
   readonly issueDate?: string | null;
   readonly Customer?: Customer | null;
-  readonly Prices?: (Price | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly invoiceCustomerId?: string | null;
@@ -92,7 +91,7 @@ export declare class Price {
   readonly id: string;
   readonly price: number;
   readonly productID: string;
-  readonly invoiceID?: string | null;
+  readonly invoiceID: string;
   readonly customers?: (CustomerPrice | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
