@@ -2,32 +2,34 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateProductInput = {
+export type CreateInvoiceEntryInput = {
   id?: string | null;
-  name?: string | null;
+  value?: number | null;
+  invoiceID: string;
+  invoiceEntryProductId?: string | null;
+  invoiceEntryPriceId?: string | null;
 };
 
-export type ModelProductConditionInput = {
-  name?: ModelStringInput | null;
-  and?: Array<ModelProductConditionInput | null> | null;
-  or?: Array<ModelProductConditionInput | null> | null;
-  not?: ModelProductConditionInput | null;
+export type ModelInvoiceEntryConditionInput = {
+  value?: ModelIntInput | null;
+  invoiceID?: ModelIDInput | null;
+  and?: Array<ModelInvoiceEntryConditionInput | null> | null;
+  or?: Array<ModelInvoiceEntryConditionInput | null> | null;
+  not?: ModelInvoiceEntryConditionInput | null;
+  invoiceEntryProductId?: ModelIDInput | null;
+  invoiceEntryPriceId?: ModelIDInput | null;
 };
 
-export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
 };
 
 export enum ModelAttributeTypes {
@@ -43,6 +45,22 @@ export enum ModelAttributeTypes {
   _null = "_null",
 }
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type ModelSizeInput = {
   ne?: number | null;
   eq?: number | null;
@@ -51,6 +69,19 @@ export type ModelSizeInput = {
   ge?: number | null;
   gt?: number | null;
   between?: Array<number | null> | null;
+};
+
+export type InvoiceEntry = {
+  __typename: "InvoiceEntry";
+  id: string;
+  value?: number | null;
+  Product?: Product | null;
+  Price?: Price | null;
+  invoiceID: string;
+  createdAt: string;
+  updatedAt: string;
+  invoiceEntryProductId?: string | null;
+  invoiceEntryPriceId?: string | null;
 };
 
 export type Product = {
@@ -118,6 +149,46 @@ export type Address = {
   updatedAt: string;
 };
 
+export type UpdateInvoiceEntryInput = {
+  id: string;
+  value?: number | null;
+  invoiceID?: string | null;
+  invoiceEntryProductId?: string | null;
+  invoiceEntryPriceId?: string | null;
+};
+
+export type DeleteInvoiceEntryInput = {
+  id: string;
+};
+
+export type CreateProductInput = {
+  id?: string | null;
+  name?: string | null;
+};
+
+export type ModelProductConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelProductConditionInput | null> | null;
+  or?: Array<ModelProductConditionInput | null> | null;
+  not?: ModelProductConditionInput | null;
+};
+
+export type ModelStringInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type UpdateProductInput = {
   id: string;
   name?: string | null;
@@ -151,22 +222,6 @@ export type ModelFloatInput = {
   between?: Array<number | null> | null;
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
 };
 
 export type UpdatePriceInput = {
@@ -204,9 +259,16 @@ export type Invoice = {
   deliveryEndDate?: string | null;
   issueDate?: string | null;
   Customer?: Customer | null;
+  InvoiceEntries?: ModelInvoiceEntryConnection | null;
   createdAt: string;
   updatedAt: string;
   invoiceCustomerId?: string | null;
+};
+
+export type ModelInvoiceEntryConnection = {
+  __typename: "ModelInvoiceEntryConnection";
+  items: Array<InvoiceEntry | null>;
+  nextToken?: string | null;
 };
 
 export type UpdateInvoiceInput = {
@@ -344,6 +406,17 @@ export type DeleteCustomerPriceInput = {
   id: string;
 };
 
+export type ModelInvoiceEntryFilterInput = {
+  id?: ModelIDInput | null;
+  value?: ModelIntInput | null;
+  invoiceID?: ModelIDInput | null;
+  and?: Array<ModelInvoiceEntryFilterInput | null> | null;
+  or?: Array<ModelInvoiceEntryFilterInput | null> | null;
+  not?: ModelInvoiceEntryFilterInput | null;
+  invoiceEntryProductId?: ModelIDInput | null;
+  invoiceEntryPriceId?: ModelIDInput | null;
+};
+
 export type ModelProductFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
@@ -443,11 +516,12 @@ export type ModelCustomerPriceFilterInput = {
   not?: ModelCustomerPriceFilterInput | null;
 };
 
-export type ModelSubscriptionProductFilterInput = {
+export type ModelSubscriptionInvoiceEntryFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionProductFilterInput | null> | null;
-  or?: Array<ModelSubscriptionProductFilterInput | null> | null;
+  value?: ModelSubscriptionIntInput | null;
+  invoiceID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionInvoiceEntryFilterInput | null> | null;
+  or?: Array<ModelSubscriptionInvoiceEntryFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
@@ -463,6 +537,25 @@ export type ModelSubscriptionIDInput = {
   beginsWith?: string | null;
   in?: Array<string | null> | null;
   notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  in?: Array<number | null> | null;
+  notIn?: Array<number | null> | null;
+};
+
+export type ModelSubscriptionProductFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionProductFilterInput | null> | null;
+  or?: Array<ModelSubscriptionProductFilterInput | null> | null;
 };
 
 export type ModelSubscriptionStringInput = {
@@ -542,6 +635,318 @@ export type ModelSubscriptionCustomerPriceFilterInput = {
   customerID?: ModelSubscriptionIDInput | null;
   and?: Array<ModelSubscriptionCustomerPriceFilterInput | null> | null;
   or?: Array<ModelSubscriptionCustomerPriceFilterInput | null> | null;
+};
+
+export type CreateInvoiceEntryMutationVariables = {
+  input: CreateInvoiceEntryInput;
+  condition?: ModelInvoiceEntryConditionInput | null;
+};
+
+export type CreateInvoiceEntryMutation = {
+  createInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
+export type UpdateInvoiceEntryMutationVariables = {
+  input: UpdateInvoiceEntryInput;
+  condition?: ModelInvoiceEntryConditionInput | null;
+};
+
+export type UpdateInvoiceEntryMutation = {
+  updateInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
+export type DeleteInvoiceEntryMutationVariables = {
+  input: DeleteInvoiceEntryInput;
+  condition?: ModelInvoiceEntryConditionInput | null;
+};
+
+export type DeleteInvoiceEntryMutation = {
+  deleteInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
 };
 
 export type CreateProductMutationVariables = {
@@ -1027,6 +1432,59 @@ export type CreateInvoiceMutation = {
       updatedAt: string;
       customerAddressId?: string | null;
     } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -1111,6 +1569,59 @@ export type UpdateInvoiceMutation = {
       updatedAt: string;
       customerAddressId?: string | null;
     } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -1194,6 +1705,59 @@ export type DeleteInvoiceMutation = {
       createdAt: string;
       updatedAt: string;
       customerAddressId?: string | null;
+    } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
     } | null;
     createdAt: string;
     updatedAt: string;
@@ -2020,6 +2584,192 @@ export type DeleteCustomerPriceMutation = {
   } | null;
 };
 
+export type GetInvoiceEntryQueryVariables = {
+  id: string;
+};
+
+export type GetInvoiceEntryQuery = {
+  getInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
+export type ListInvoiceEntriesQueryVariables = {
+  filter?: ModelInvoiceEntryFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type ListInvoiceEntriesQuery = {
+  listInvoiceEntries?: {
+    __typename: "ModelInvoiceEntryConnection";
+    items: Array<{
+      __typename: "InvoiceEntry";
+      id: string;
+      value?: number | null;
+      Product?: {
+        __typename: "Product";
+        id: string;
+        name?: string | null;
+        Prices?: {
+          __typename: "ModelPriceConnection";
+          items: Array<{
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      Price?: {
+        __typename: "Price";
+        id: string;
+        price?: number | null;
+        productID: string;
+        customers?: {
+          __typename: "ModelCustomerPriceConnection";
+          items: Array<{
+            __typename: "CustomerPrice";
+            id: string;
+            priceID: string;
+            customerID: string;
+            price: {
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            };
+            customer: {
+              __typename: "Customer";
+              id: string;
+              companyName: string;
+              ownerName: string;
+              createdAt: string;
+              updatedAt: string;
+              customerAddressId?: string | null;
+            };
+            createdAt: string;
+            updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      invoiceID: string;
+      createdAt: string;
+      updatedAt: string;
+      invoiceEntryProductId?: string | null;
+      invoiceEntryPriceId?: string | null;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
 export type GetProductQueryVariables = {
   id: string;
 };
@@ -2342,6 +3092,59 @@ export type GetInvoiceQuery = {
       updatedAt: string;
       customerAddressId?: string | null;
     } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -2410,6 +3213,43 @@ export type ListInvoicesQuery = {
         createdAt: string;
         updatedAt: string;
         customerAddressId?: string | null;
+      } | null;
+      InvoiceEntries?: {
+        __typename: "ModelInvoiceEntryConnection";
+        items: Array<{
+          __typename: "InvoiceEntry";
+          id: string;
+          value?: number | null;
+          Product?: {
+            __typename: "Product";
+            id: string;
+            name?: string | null;
+            Prices?: {
+              __typename: "ModelPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          Price?: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          invoiceID: string;
+          createdAt: string;
+          updatedAt: string;
+          invoiceEntryProductId?: string | null;
+          invoiceEntryPriceId?: string | null;
+        } | null>;
+        nextToken?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
@@ -2929,6 +3769,315 @@ export type ListCustomerPricesQuery = {
   } | null;
 };
 
+export type OnCreateInvoiceEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceEntryFilterInput | null;
+};
+
+export type OnCreateInvoiceEntrySubscription = {
+  onCreateInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
+export type OnUpdateInvoiceEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceEntryFilterInput | null;
+};
+
+export type OnUpdateInvoiceEntrySubscription = {
+  onUpdateInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
+export type OnDeleteInvoiceEntrySubscriptionVariables = {
+  filter?: ModelSubscriptionInvoiceEntryFilterInput | null;
+};
+
+export type OnDeleteInvoiceEntrySubscription = {
+  onDeleteInvoiceEntry?: {
+    __typename: "InvoiceEntry";
+    id: string;
+    value?: number | null;
+    Product?: {
+      __typename: "Product";
+      id: string;
+      name?: string | null;
+      Prices?: {
+        __typename: "ModelPriceConnection";
+        items: Array<{
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    Price?: {
+      __typename: "Price";
+      id: string;
+      price?: number | null;
+      productID: string;
+      customers?: {
+        __typename: "ModelCustomerPriceConnection";
+        items: Array<{
+          __typename: "CustomerPrice";
+          id: string;
+          priceID: string;
+          customerID: string;
+          price: {
+            __typename: "Price";
+            id: string;
+            price?: number | null;
+            productID: string;
+            customers?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          };
+          customer: {
+            __typename: "Customer";
+            id: string;
+            companyName: string;
+            ownerName: string;
+            Address?: {
+              __typename: "Address";
+              id: string;
+              street: string;
+              number: string;
+              zip: string;
+              city: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null;
+            Prices?: {
+              __typename: "ModelCustomerPriceConnection";
+              nextToken?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+            customerAddressId?: string | null;
+          };
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    invoiceID: string;
+    createdAt: string;
+    updatedAt: string;
+    invoiceEntryProductId?: string | null;
+    invoiceEntryPriceId?: string | null;
+  } | null;
+};
+
 export type OnCreateProductSubscriptionVariables = {
   filter?: ModelSubscriptionProductFilterInput | null;
 };
@@ -3405,6 +4554,59 @@ export type OnCreateInvoiceSubscription = {
       updatedAt: string;
       customerAddressId?: string | null;
     } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -3488,6 +4690,59 @@ export type OnUpdateInvoiceSubscription = {
       updatedAt: string;
       customerAddressId?: string | null;
     } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -3570,6 +4825,59 @@ export type OnDeleteInvoiceSubscription = {
       createdAt: string;
       updatedAt: string;
       customerAddressId?: string | null;
+    } | null;
+    InvoiceEntries?: {
+      __typename: "ModelInvoiceEntryConnection";
+      items: Array<{
+        __typename: "InvoiceEntry";
+        id: string;
+        value?: number | null;
+        Product?: {
+          __typename: "Product";
+          id: string;
+          name?: string | null;
+          Prices?: {
+            __typename: "ModelPriceConnection";
+            items: Array<{
+              __typename: "Price";
+              id: string;
+              price?: number | null;
+              productID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        Price?: {
+          __typename: "Price";
+          id: string;
+          price?: number | null;
+          productID: string;
+          customers?: {
+            __typename: "ModelCustomerPriceConnection";
+            items: Array<{
+              __typename: "CustomerPrice";
+              id: string;
+              priceID: string;
+              customerID: string;
+              createdAt: string;
+              updatedAt: string;
+            } | null>;
+            nextToken?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        invoiceID: string;
+        createdAt: string;
+        updatedAt: string;
+        invoiceEntryProductId?: string | null;
+        invoiceEntryPriceId?: string | null;
+      } | null>;
+      nextToken?: string | null;
     } | null;
     createdAt: string;
     updatedAt: string;

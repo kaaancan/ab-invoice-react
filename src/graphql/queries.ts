@@ -2,6 +2,163 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getInvoiceEntry = /* GraphQL */ `
+  query GetInvoiceEntry($id: ID!) {
+    getInvoiceEntry(id: $id) {
+      id
+      value
+      Product {
+        id
+        name
+        Prices {
+          items {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      Price {
+        id
+        price
+        productID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+              }
+              Prices {
+                nextToken
+              }
+              createdAt
+              updatedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      invoiceID
+      createdAt
+      updatedAt
+      invoiceEntryProductId
+      invoiceEntryPriceId
+    }
+  }
+`;
+export const listInvoiceEntries = /* GraphQL */ `
+  query ListInvoiceEntries(
+    $filter: ModelInvoiceEntryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInvoiceEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        value
+        Product {
+          id
+          name
+          Prices {
+            items {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        Price {
+          id
+          price
+          productID
+          customers {
+            items {
+              id
+              priceID
+              customerID
+              price {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              customer {
+                id
+                companyName
+                ownerName
+                createdAt
+                updatedAt
+                customerAddressId
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        invoiceID
+        createdAt
+        updatedAt
+        invoiceEntryProductId
+        invoiceEntryPriceId
+      }
+      nextToken
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -271,6 +428,51 @@ export const getInvoice = /* GraphQL */ `
         updatedAt
         customerAddressId
       }
+      InvoiceEntries {
+        items {
+          id
+          value
+          Product {
+            id
+            name
+            Prices {
+              items {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          Price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          invoiceID
+          createdAt
+          updatedAt
+          invoiceEntryProductId
+          invoiceEntryPriceId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       invoiceCustomerId
@@ -330,6 +532,37 @@ export const listInvoices = /* GraphQL */ `
           createdAt
           updatedAt
           customerAddressId
+        }
+        InvoiceEntries {
+          items {
+            id
+            value
+            Product {
+              id
+              name
+              Prices {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            Price {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            invoiceID
+            createdAt
+            updatedAt
+            invoiceEntryProductId
+            invoiceEntryPriceId
+          }
+          nextToken
         }
         createdAt
         updatedAt

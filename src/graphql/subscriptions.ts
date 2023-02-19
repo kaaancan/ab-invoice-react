@@ -2,6 +2,270 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateInvoiceEntry = /* GraphQL */ `
+  subscription OnCreateInvoiceEntry(
+    $filter: ModelSubscriptionInvoiceEntryFilterInput
+  ) {
+    onCreateInvoiceEntry(filter: $filter) {
+      id
+      value
+      Product {
+        id
+        name
+        Prices {
+          items {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      Price {
+        id
+        price
+        productID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+              }
+              Prices {
+                nextToken
+              }
+              createdAt
+              updatedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      invoiceID
+      createdAt
+      updatedAt
+      invoiceEntryProductId
+      invoiceEntryPriceId
+    }
+  }
+`;
+export const onUpdateInvoiceEntry = /* GraphQL */ `
+  subscription OnUpdateInvoiceEntry(
+    $filter: ModelSubscriptionInvoiceEntryFilterInput
+  ) {
+    onUpdateInvoiceEntry(filter: $filter) {
+      id
+      value
+      Product {
+        id
+        name
+        Prices {
+          items {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      Price {
+        id
+        price
+        productID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+              }
+              Prices {
+                nextToken
+              }
+              createdAt
+              updatedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      invoiceID
+      createdAt
+      updatedAt
+      invoiceEntryProductId
+      invoiceEntryPriceId
+    }
+  }
+`;
+export const onDeleteInvoiceEntry = /* GraphQL */ `
+  subscription OnDeleteInvoiceEntry(
+    $filter: ModelSubscriptionInvoiceEntryFilterInput
+  ) {
+    onDeleteInvoiceEntry(filter: $filter) {
+      id
+      value
+      Product {
+        id
+        name
+        Prices {
+          items {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      Price {
+        id
+        price
+        productID
+        customers {
+          items {
+            id
+            priceID
+            customerID
+            price {
+              id
+              price
+              productID
+              customers {
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            customer {
+              id
+              companyName
+              ownerName
+              Address {
+                id
+                street
+                number
+                zip
+                city
+                createdAt
+                updatedAt
+              }
+              Prices {
+                nextToken
+              }
+              createdAt
+              updatedAt
+              customerAddressId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      invoiceID
+      createdAt
+      updatedAt
+      invoiceEntryProductId
+      invoiceEntryPriceId
+    }
+  }
+`;
 export const onCreateProduct = /* GraphQL */ `
   subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
     onCreateProduct(filter: $filter) {
@@ -396,6 +660,51 @@ export const onCreateInvoice = /* GraphQL */ `
         updatedAt
         customerAddressId
       }
+      InvoiceEntries {
+        items {
+          id
+          value
+          Product {
+            id
+            name
+            Prices {
+              items {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          Price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          invoiceID
+          createdAt
+          updatedAt
+          invoiceEntryProductId
+          invoiceEntryPriceId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       invoiceCustomerId
@@ -466,6 +775,51 @@ export const onUpdateInvoice = /* GraphQL */ `
         updatedAt
         customerAddressId
       }
+      InvoiceEntries {
+        items {
+          id
+          value
+          Product {
+            id
+            name
+            Prices {
+              items {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          Price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          invoiceID
+          createdAt
+          updatedAt
+          invoiceEntryProductId
+          invoiceEntryPriceId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       invoiceCustomerId
@@ -535,6 +889,51 @@ export const onDeleteInvoice = /* GraphQL */ `
         createdAt
         updatedAt
         customerAddressId
+      }
+      InvoiceEntries {
+        items {
+          id
+          value
+          Product {
+            id
+            name
+            Prices {
+              items {
+                id
+                price
+                productID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          Price {
+            id
+            price
+            productID
+            customers {
+              items {
+                id
+                priceID
+                customerID
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          invoiceID
+          createdAt
+          updatedAt
+          invoiceEntryProductId
+          invoiceEntryPriceId
+        }
+        nextToken
       }
       createdAt
       updatedAt

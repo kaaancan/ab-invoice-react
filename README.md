@@ -69,4 +69,14 @@ the [Create React App documentation](https://facebook.github.io/create-react-app
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Add data via AWS AppSync
+
+1. Go to AWS AppSync in AWS
+2. Go to Queries
+3. Login with your user credentials
+4. Run query, e.g.:
+    1. mutation MyMutation { createAddress(input: {city: "Lauterhofen", number: "15", street: "Bartelacker strasse 15",
+       zip: "92283"}) { number street zip city } }
+
+
 

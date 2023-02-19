@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import dayjs from "dayjs";
-import { InvoiceCreate } from "./InvoiceCreate";
+import { CustomerInvoiceSelect } from "./CustomerInvoiceSelect";
 import {
   Customer,
   ListCustomersQuery,
@@ -85,7 +85,7 @@ export const InvoiceStepper = memo(
               value[1] !== null &&
               customers.length > 0 &&
               products.length > 0 && (
-                <InvoiceCreate
+                <CustomerInvoiceSelect
                   startDate={value[0]}
                   endDate={value[1]}
                   customers={customers}

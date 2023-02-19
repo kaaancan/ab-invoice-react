@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Center } from "@mantine/core";
-import { InvoiceStepper } from "../invoice/InvoiceStepper";
+import { InvoiceStepper } from "../invoice";
 
 export const InvoicePage = memo(function InvoicePage(): React.ReactElement {
   return (
