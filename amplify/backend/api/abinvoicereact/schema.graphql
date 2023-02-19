@@ -1,3 +1,11 @@
+type InvoiceEntry @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  value: Int
+  Product: Product @hasOne
+  Price: Price @hasOne
+  invoiceID: ID! @index(name: "byInvoice")
+}
+
 type Product @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String
@@ -17,6 +25,7 @@ type Invoice @model @auth(rules: [{allow: private}]) {
   deliveryEndDate: AWSDate
   issueDate: AWSDate
   Customer: Customer @hasOne
+  InvoiceEntries: [InvoiceEntry] @hasMany(indexName: "byInvoice", fields: ["id"])
 }
 
 type Customer @model @auth(rules: [{allow: private}]) {
