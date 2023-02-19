@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Customer, Product } from "../API";
 import { find } from "lodash";
-import { TextInput } from "@mantine/core";
+import { NumberInput } from "@mantine/core";
 import { InvoiceCreateProps } from "./types";
 import { formatNumberToEuro } from "./utils";
 
@@ -24,7 +24,7 @@ export const InvoiceCreate = memo(function InvoiceCreate(
           if (productWithPrice !== null && productForPrice !== undefined) {
             return (
               <div className={"productInput"} key={index}>
-                <TextInput style={{ width: 50 }} />
+                <NumberInput hideControls style={{ width: 80 }} />
                 <div>
                   {formatNumberToEuro(productWithPrice.price.price || 0)}
                 </div>

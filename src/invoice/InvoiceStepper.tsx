@@ -42,7 +42,9 @@ export const InvoiceStepper = memo(
               ? allCustomers.push(customer as Customer)
               : customer
           );
-          setCustomers(allCustomers);
+          setCustomers(
+            allCustomers.filter((customer) => !!customer.Prices?.items.length)
+          );
         }
       });
     }, []);

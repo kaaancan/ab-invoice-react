@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Customer, Invoice } from "../API";
 
 import "./InvoiceCreate.css";
-import { Select } from "@mantine/core";
+import { Divider, Select } from "@mantine/core";
 import { InvoiceCreateProps } from "./types";
 import { InvoiceCreate } from "./InvoiceCreate";
 import { PrevNextButtons } from "./prev-next-buttons";
@@ -57,6 +57,7 @@ export const CustomerInvoiceSelect = memo(function CustomerInvoiceSelect(
           }}
         />
       </div>
+      <Divider />
       {currentCustomer !== undefined && (
         <InvoiceCreate currentCustomer={currentCustomer} products={products} />
       )}
