@@ -1,54 +1,55 @@
 type InvoiceEntry @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  value: Int
-  Product: Product @hasOne
-  Price: Price @hasOne
-  invoiceID: ID! @index(name: "byInvoice")
+    id: ID!
+    value: Int
+    Product: Product @hasOne
+    Price: Price @hasOne
+    invoiceID: ID! @index(name: "byInvoice")
 }
 
 type Product @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  name: String
-  Prices: [Price] @hasMany(indexName: "byProduct", fields: ["id"])
+    id: ID!
+    name: String
+    Prices: [Price] @hasMany(indexName: "byProduct", fields: ["id"])
 }
 
 type Price @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  price: Float
-  productID: ID! @index(name: "byProduct")
-  customers: [Customer] @manyToMany(relationName: "CustomerPrice")
+    id: ID!
+    price: Float
+    productID: ID! @index(name: "byProduct")
+    customers: [Customer] @manyToMany(relationName: "CustomerPrice")
 }
 
 type Invoice @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  deliveryStartDate: AWSDate
-  deliveryEndDate: AWSDate
-  issueDate: AWSDate
-  Customer: Customer @hasOne
-  InvoiceEntries: [InvoiceEntry] @hasMany(indexName: "byInvoice", fields: ["id"])
+    id: ID!
+    deliveryStartDate: AWSDate!
+    deliveryEndDate: AWSDate!
+    issueDate: AWSDate!
+    Customer: Customer @hasOne
+    InvoiceEntries: [InvoiceEntry] @hasMany(indexName: "byInvoice", fields: ["id"])
+    invoiceNumber: Int!
 }
 
 type Customer @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  companyName: String!
-  ownerName: String!
-  Address: Address @hasOne
-  Prices: [Price] @manyToMany(relationName: "CustomerPrice")
+    id: ID!
+    companyName: String!
+    ownerName: String!
+    Address: Address @hasOne
+    Prices: [Price] @manyToMany(relationName: "CustomerPrice")
 }
 
 type Address @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  street: String!
-  number: String!
-  zip: String!
-  city: String!
+    id: ID!
+    street: String!
+    number: String!
+    zip: String!
+    city: String!
 }
 
 type InvoiceIssuerCompany @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  name: String!
-  phone: String!
-  taxId: String!
-  Address: Address @hasOne
+    id: ID!
+    name: String!
+    phone: String!
+    taxId: String!
+    Address: Address @hasOne
 }
  

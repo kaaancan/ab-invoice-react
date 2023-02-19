@@ -10,7 +10,7 @@ import { PrevNextButtons } from "./prev-next-buttons";
 export const CustomerInvoiceSelect = memo(function CustomerInvoiceSelect(
   props: InvoiceCreateProps
 ): React.ReactElement {
-  const { customers, products } = props;
+  const { customers, products, startDate, endDate } = props;
 
   const [createInvoices, setCreateInvoice] = useState<Invoice[]>();
 
@@ -59,7 +59,12 @@ export const CustomerInvoiceSelect = memo(function CustomerInvoiceSelect(
       </div>
       <Divider />
       {currentCustomer !== undefined && (
-        <InvoiceCreate currentCustomer={currentCustomer} products={products} />
+        <InvoiceCreate
+          startDate={startDate}
+          endDate={endDate}
+          currentCustomer={currentCustomer}
+          products={products}
+        />
       )}
       <PrevNextButtons
         currentCustomerIndex={currentCustomerIndex}

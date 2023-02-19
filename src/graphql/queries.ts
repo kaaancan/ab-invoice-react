@@ -473,6 +473,7 @@ export const getInvoice = /* GraphQL */ `
         }
         nextToken
       }
+      invoiceNumber
       createdAt
       updatedAt
       invoiceCustomerId
@@ -564,6 +565,7 @@ export const listInvoices = /* GraphQL */ `
           }
           nextToken
         }
+        invoiceNumber
         createdAt
         updatedAt
         invoiceCustomerId

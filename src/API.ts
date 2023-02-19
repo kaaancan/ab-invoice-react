@@ -236,9 +236,10 @@ export type DeletePriceInput = {
 
 export type CreateInvoiceInput = {
   id?: string | null;
-  deliveryStartDate?: string | null;
-  deliveryEndDate?: string | null;
-  issueDate?: string | null;
+  deliveryStartDate: string;
+  deliveryEndDate: string;
+  issueDate: string;
+  invoiceNumber: number;
   invoiceCustomerId?: string | null;
 };
 
@@ -246,6 +247,7 @@ export type ModelInvoiceConditionInput = {
   deliveryStartDate?: ModelStringInput | null;
   deliveryEndDate?: ModelStringInput | null;
   issueDate?: ModelStringInput | null;
+  invoiceNumber?: ModelIntInput | null;
   and?: Array<ModelInvoiceConditionInput | null> | null;
   or?: Array<ModelInvoiceConditionInput | null> | null;
   not?: ModelInvoiceConditionInput | null;
@@ -255,11 +257,12 @@ export type ModelInvoiceConditionInput = {
 export type Invoice = {
   __typename: "Invoice";
   id: string;
-  deliveryStartDate?: string | null;
-  deliveryEndDate?: string | null;
-  issueDate?: string | null;
+  deliveryStartDate: string;
+  deliveryEndDate: string;
+  issueDate: string;
   Customer?: Customer | null;
   InvoiceEntries?: ModelInvoiceEntryConnection | null;
+  invoiceNumber: number;
   createdAt: string;
   updatedAt: string;
   invoiceCustomerId?: string | null;
@@ -276,6 +279,7 @@ export type UpdateInvoiceInput = {
   deliveryStartDate?: string | null;
   deliveryEndDate?: string | null;
   issueDate?: string | null;
+  invoiceNumber?: number | null;
   invoiceCustomerId?: string | null;
 };
 
@@ -445,6 +449,7 @@ export type ModelInvoiceFilterInput = {
   deliveryStartDate?: ModelStringInput | null;
   deliveryEndDate?: ModelStringInput | null;
   issueDate?: ModelStringInput | null;
+  invoiceNumber?: ModelIntInput | null;
   and?: Array<ModelInvoiceFilterInput | null> | null;
   or?: Array<ModelInvoiceFilterInput | null> | null;
   not?: ModelInvoiceFilterInput | null;
@@ -598,6 +603,7 @@ export type ModelSubscriptionInvoiceFilterInput = {
   deliveryStartDate?: ModelSubscriptionStringInput | null;
   deliveryEndDate?: ModelSubscriptionStringInput | null;
   issueDate?: ModelSubscriptionStringInput | null;
+  invoiceNumber?: ModelSubscriptionIntInput | null;
   and?: Array<ModelSubscriptionInvoiceFilterInput | null> | null;
   or?: Array<ModelSubscriptionInvoiceFilterInput | null> | null;
 };
@@ -1363,9 +1369,9 @@ export type CreateInvoiceMutation = {
   createInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -1485,6 +1491,7 @@ export type CreateInvoiceMutation = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -1500,9 +1507,9 @@ export type UpdateInvoiceMutation = {
   updateInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -1622,6 +1629,7 @@ export type UpdateInvoiceMutation = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -1637,9 +1645,9 @@ export type DeleteInvoiceMutation = {
   deleteInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -1759,6 +1767,7 @@ export type DeleteInvoiceMutation = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -3023,9 +3032,9 @@ export type GetInvoiceQuery = {
   getInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -3145,6 +3154,7 @@ export type GetInvoiceQuery = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -3163,9 +3173,9 @@ export type ListInvoicesQuery = {
     items: Array<{
       __typename: "Invoice";
       id: string;
-      deliveryStartDate?: string | null;
-      deliveryEndDate?: string | null;
-      issueDate?: string | null;
+      deliveryStartDate: string;
+      deliveryEndDate: string;
+      issueDate: string;
       Customer?: {
         __typename: "Customer";
         id: string;
@@ -3251,6 +3261,7 @@ export type ListInvoicesQuery = {
         } | null>;
         nextToken?: string | null;
       } | null;
+      invoiceNumber: number;
       createdAt: string;
       updatedAt: string;
       invoiceCustomerId?: string | null;
@@ -4485,9 +4496,9 @@ export type OnCreateInvoiceSubscription = {
   onCreateInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -4607,6 +4618,7 @@ export type OnCreateInvoiceSubscription = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -4621,9 +4633,9 @@ export type OnUpdateInvoiceSubscription = {
   onUpdateInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -4743,6 +4755,7 @@ export type OnUpdateInvoiceSubscription = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;
@@ -4757,9 +4770,9 @@ export type OnDeleteInvoiceSubscription = {
   onDeleteInvoice?: {
     __typename: "Invoice";
     id: string;
-    deliveryStartDate?: string | null;
-    deliveryEndDate?: string | null;
-    issueDate?: string | null;
+    deliveryStartDate: string;
+    deliveryEndDate: string;
+    issueDate: string;
     Customer?: {
       __typename: "Customer";
       id: string;
@@ -4879,6 +4892,7 @@ export type OnDeleteInvoiceSubscription = {
       } | null>;
       nextToken?: string | null;
     } | null;
+    invoiceNumber: number;
     createdAt: string;
     updatedAt: string;
     invoiceCustomerId?: string | null;

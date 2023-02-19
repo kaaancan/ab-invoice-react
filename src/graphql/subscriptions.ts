@@ -705,6 +705,7 @@ export const onCreateInvoice = /* GraphQL */ `
         }
         nextToken
       }
+      invoiceNumber
       createdAt
       updatedAt
       invoiceCustomerId
@@ -820,6 +821,7 @@ export const onUpdateInvoice = /* GraphQL */ `
         }
         nextToken
       }
+      invoiceNumber
       createdAt
       updatedAt
       invoiceCustomerId
@@ -935,6 +937,7 @@ export const onDeleteInvoice = /* GraphQL */ `
         }
         nextToken
       }
+      invoiceNumber
       createdAt
       updatedAt
       invoiceCustomerId

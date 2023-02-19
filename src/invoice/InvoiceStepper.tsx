@@ -1,7 +1,7 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { CustomerInvoiceSelect } from "./CustomerInvoiceSelect";
 import {
   Customer,
@@ -19,9 +19,9 @@ export const InvoiceStepper = memo(
       setActive((current) => (current < 2 ? current + 1 : current));
     const prevStep = () =>
       setActive((current) => (current > 0 ? current - 1 : current));
-    const [value, setValue] = useState<[Date | null, Date | null]>([
-      dayjs().startOf("month").toDate(),
-      dayjs().endOf("month").toDate(),
+    const [value, setValue] = useState<[Dayjs, Dayjs]>([
+      dayjs().startOf("month"),
+      dayjs().endOf("month"),
     ]);
 
     const [customers, setCustomers] = useState<Customer[]>([]);
@@ -67,16 +67,23 @@ export const InvoiceStepper = memo(
       });
     }, []);
 
-    console.log(customers);
-    console.log(products);
+    const onChangeDateRangePicker = useCallback(
+      (value: [Date | null, Date | null]) => {
+        if (value[0] === null || value[1] === null) {
+          return;
+        }
+        setValue([dayjs(value[0]), dayjs(value[1])]);
+      },
+      []
+    );
     return (
       <div>
         <Stepper active={active} onStepClick={setActive} breakpoint="sm">
           <Stepper.Step label="İlk adım" description="Ayı seçin">
             <DateRangePicker
               label={"Faturalarin tarihi secin"}
-              value={value}
-              onChange={setValue}
+              value={[value[0].toDate(), value[1].toDate()]}
+              onChange={onChangeDateRangePicker}
             />
           </Stepper.Step>
           <Stepper.Step
@@ -95,7 +102,7 @@ export const InvoiceStepper = memo(
                 />
               )}
           </Stepper.Step>
-          <Stepper.Completed>Aasdasd</Stepper.Completed>
+          <Stepper.Completed>Faturalar yazildi</Stepper.Completed>
         </Stepper>
 
         <Group position="center" mt="xl">
