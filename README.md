@@ -1,4 +1,13 @@
-# Read this after a long time
+# Project
+
+This Project is a web app fully hosted on AWS using Amplify. Stack:
+
+1. React/Typescript on S3
+2. AWS Cognito for User Management
+3. DynamoDB
+4. GraphQL
+
+## Read this after a long time
 
 This WebApp is fully hosted (FE/BE) on AWS Amplify. To start fresh:
 
