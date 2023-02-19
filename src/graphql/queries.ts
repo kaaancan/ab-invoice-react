@@ -1012,3 +1012,19 @@ export const listCustomerPrices = /* GraphQL */ `
     }
   }
 `;
+
+export const listInvoiceNumbers = /* GraphQL */ `
+  query ListInvoices(
+    $filter: ModelInvoiceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInvoices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        invoiceNumber
+      }
+      nextToken
+    }
+  }
+`;

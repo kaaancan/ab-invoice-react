@@ -1,18 +1,15 @@
 import React, { memo, useEffect, useState } from "react";
-import { Customer, Invoice } from "../API";
+import { Customer } from "../API";
 
-import "./InvoiceCreate.css";
 import { Divider, Select } from "@mantine/core";
 import { InvoiceCreateProps } from "./types";
 import { InvoiceCreate } from "./InvoiceCreate";
 import { PrevNextButtons } from "./prev-next-buttons";
 
-export const CustomerInvoiceSelect = memo(function CustomerInvoiceSelect(
+export const CustomerInvoice = memo(function CustomerInvoice(
   props: InvoiceCreateProps
 ): React.ReactElement {
   const { customers, products, startDate, endDate } = props;
-
-  const [createInvoices, setCreateInvoice] = useState<Invoice[]>();
 
   const [currentCustomer, setCurrentCustomer] = useState<Customer>();
 
@@ -30,7 +27,7 @@ export const CustomerInvoiceSelect = memo(function CustomerInvoiceSelect(
   useEffect(() => {
     setCurrentCustomer(customers[currentCustomerIndex]);
     setCurrentCustomerSelect(customers[currentCustomerIndex].id);
-  }, [currentCustomerIndex]);
+  }, [currentCustomerIndex, customers]);
 
   return (
     <div className={"invoiceCreate"}>

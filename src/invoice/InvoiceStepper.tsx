@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { Button, Group, Stepper } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import dayjs, { Dayjs } from "dayjs";
-import { CustomerInvoiceSelect } from "./CustomerInvoiceSelect";
+import { CustomerInvoice } from "./CustomerInvoice";
 import {
   Customer,
   ListCustomersQuery,
@@ -11,6 +11,7 @@ import {
 } from "../API";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import "./Invoice.css";
 
 export const InvoiceStepper = memo(
   function InvoiceStepper(): React.ReactElement {
@@ -77,7 +78,7 @@ export const InvoiceStepper = memo(
       []
     );
     return (
-      <div>
+      <div className={"invoiceStepper"}>
         <Stepper active={active} onStepClick={setActive} breakpoint="sm">
           <Stepper.Step label="İlk adım" description="Ayı seçin">
             <DateRangePicker
@@ -94,7 +95,7 @@ export const InvoiceStepper = memo(
               value[1] !== null &&
               customers.length > 0 &&
               products.length > 0 && (
-                <CustomerInvoiceSelect
+                <CustomerInvoice
                   startDate={value[0]}
                   endDate={value[1]}
                   customers={customers}

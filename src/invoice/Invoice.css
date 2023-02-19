@@ -22,3 +22,11 @@
     gap: 0.5rem;
     align-items: center;
 }
+
+
+.invoiceStepper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 2rem;
+}

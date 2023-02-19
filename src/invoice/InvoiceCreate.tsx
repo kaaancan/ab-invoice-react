@@ -1,12 +1,13 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useMemo } from "react";
 import { CreateInvoiceInput, Customer, Product } from "../API";
 import { find } from "lodash";
 import { Button, NumberInput } from "@mantine/core";
 import { InvoiceCreateProps } from "./types";
 import { formatNumberToEuro } from "./utils";
-import { API } from "aws-amplify";
-import { createInvoice } from "../graphql/mutations";
+import { API, graphqlOperation } from "aws-amplify";
 import { formatDayjsToAWSDate } from "../utils";
+import { listInvoices } from "../graphql/queries";
+import { useCreateInvoice } from "../hooks";
 
 interface InvoiceProps
   extends Pick<InvoiceCreateProps, "products" | "startDate" | "endDate"> {
@@ -18,18 +19,23 @@ export const InvoiceCreate = memo(function InvoiceCreate(
 ): React.ReactElement {
   const { currentCustomer, products, startDate, endDate } = props;
 
-  const [invoice, setInvoice] = useState<CreateInvoiceInput>({
-    invoiceCustomerId: currentCustomer.id,
-    deliveryStartDate: formatDayjsToAWSDate(startDate),
-    deliveryEndDate: formatDayjsToAWSDate(endDate),
-    issueDate: formatDayjsToAWSDate(endDate),
-    //TODO KAAN: Fetch the last invoiceNumber from the database
-    invoiceNumber: 1179,
-  });
+  const createInvoiceInput = useMemo((): CreateInvoiceInput => {
+    return {
+      invoiceCustomerId: currentCustomer.id,
+      deliveryStartDate: formatDayjsToAWSDate(startDate),
+      deliveryEndDate: formatDayjsToAWSDate(endDate),
+      issueDate: formatDayjsToAWSDate(endDate),
+      //TODO KAAN: Fetch the last invoiceNumber from the database
+      invoiceNumber: 1179,
+    };
+  }, [currentCustomer.id, endDate, startDate]);
 
-  const createInvoiceCallback = useCallback(() => {
-    API.graphql({ query: createInvoice, variables: { input: invoice } });
+  const allInvoices = useMemo(() => {
+    API.graphql(graphqlOperation(listInvoices));
   }, []);
+
+  const { execute: createInvoiceRequest } =
+    useCreateInvoice(createInvoiceInput);
 
   return (
     <div className={"productInputWrapper"}>
@@ -50,7 +56,7 @@ export const InvoiceCreate = memo(function InvoiceCreate(
             );
           }
         })}
-      <Button onClick={createInvoiceCallback}>Create Invoice</Button>
+      <Button onClick={createInvoiceRequest}>Create Invoice</Button>
     </div>
   );
 });
